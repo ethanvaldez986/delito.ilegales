@@ -741,8 +741,8 @@
                     </div>
 
                     <div class="form-group disclaimer-group">
-                        <p class="form-disclaimer" id="disclaimer-text">* No incluya detalles personales sobre usted mismo en el reporte.</p>
-                        <p class="form-note" id="note-text">* El individuo reportado será investigado de manera discreta.</p>
+                        <p class="form-disclaimer" id="disclaimer-text">* No nos interesa la información sobre usted. Solo necesitamos detalles sobre el individuo que está reportando.</p>
+                        <p class="form-note" id="note-text">* Solo se investigarán individuos que residen ilegalmente en Colorado Springs y son violentos.</p>
                     </div>
 
                     <button type="submit" class="form-submit-button" id="submit-button">Enviar Reporte</button>
@@ -755,7 +755,7 @@
             <div class="disclaimer-content">
                 <h2 class="disclaimer-title" id="disclaimer-title">Aviso Legal y de Privacidad</h2>
                 <p class="disclaimer-text" id="disclaimer-text">
-                    Todos los reportes realizados a través de esta plataforma son completamente anónimos y serán tratados con la máxima confidencialidad. Nos comprometemos a investigar cada reporte de manera discreta y profesional, garantizando la protección de la identidad de quienes realizan los reportes.
+                    Todos los reportes realizados a través de esta plataforma son completamente anónimos y serán tratados con la máxima confidencialidad. No recopilamos ninguna información personal sobre usted. Nuestro único interés es investigar a individuos que residen ilegalmente en Colorado Springs y que han cometido actos violentos.
                 </p>
             </div>
         </section>
@@ -765,7 +765,7 @@
             <div class="info-content">
                 <h2 class="info-title" id="info-title">¿Cómo Funciona?</h2>
                 <p class="info-text" id="info-text">
-                    Nuestra plataforma le permite reportar actividades delictivas o sospechosas de manera anónima. Simplemente complete el formulario de reporte con los detalles necesarios y nuestro equipo iniciará una investigación discreta para abordar la situación reportada.
+                    Nuestra plataforma le permite reportar actividades violentas de individuos que residen ilegalmente en Colorado Springs de manera anónima. Simplemente complete el formulario de reporte con los detalles necesarios y nuestro equipo iniciará una investigación discreta para abordar la situación reportada.
                 </p>
                 <ul class="info-list" id="info-list">
                     <li>Proporcione información clara y precisa sobre el incidente.</li>
@@ -831,16 +831,16 @@
                 },
                 additionalDetails: "Detalles Adicionales:",
                 additionalDetailsPlaceholder: "Proporcione detalles adicionales aquí...",
-                disclaimer: "* No incluya detalles personales sobre usted mismo en el reporte.",
-                note: "* El individuo reportado será investigado de manera discreta.",
+                disclaimer: "* No nos interesa la información sobre usted. Solo necesitamos detalles sobre el individuo que está reportando.",
+                note: "* Solo se investigarán individuos que residen ilegalmente en Colorado Springs y que han cometido actos violentos.",
                 submitButton: "Enviar Reporte",
                 footer: "© 2025 Plataforma de Reporte Anónimo. Todos los derechos reservados.",
                 formLegend: "Detalles del Reporte",
                 languageToggle: "English",
                 disclaimerTitle: "Aviso Legal y de Privacidad",
-                disclaimerText: "Todos los reportes realizados a través de esta plataforma son completamente anónimos y serán tratados con la máxima confidencialidad. Nos comprometemos a investigar cada reporte de manera discreta y profesional, garantizando la protección de la identidad de quienes realizan los reportes.",
+                disclaimerText: "Todos los reportes realizados a través de esta plataforma son completamente anónimos y serán tratados con la máxima confidencialidad. No recopilamos ninguna información personal sobre usted. Nuestro único interés es investigar a individuos que residen ilegalmente en Colorado Springs y que han cometido actos violentos.",
                 infoTitle: "¿Cómo Funciona?",
-                infoText: "Nuestra plataforma le permite reportar actividades delictivas o sospechosas de manera anónima. Simplemente complete el formulario de reporte con los detalles necesarios y nuestro equipo iniciará una investigación discreta para abordar la situación reportada.",
+                infoText: "Nuestra plataforma le permite reportar actividades violentas de individuos que residen ilegalmente en Colorado Springs de manera anónima. Simplemente complete el formulario de reporte con los detalles necesarios y nuestro equipo iniciará una investigación discreta para abordar la situación reportada.",
                 infoList: [
                     "Proporcione información clara y precisa sobre el incidente.",
                     "Evite incluir datos personales para mantener su anonimato.",
@@ -873,16 +873,16 @@
                 },
                 additionalDetails: "Additional Details:",
                 additionalDetailsPlaceholder: "Provide additional details here...",
-                disclaimer: "* Do not include personal details about yourself in the report.",
-                note: "* The reported individual will be discreetly investigated.",
+                disclaimer: "* We are not interested in information about you. We only need details about the individual you are reporting.",
+                note: "* Only individuals residing illegally in Colorado Springs and who have committed violent acts will be investigated.",
                 submitButton: "Submit Report",
                 footer: "© 2025 Anonymous Reporting Platform. All rights reserved.",
                 formLegend: "Report Details",
                 languageToggle: "Español",
                 disclaimerTitle: "Legal and Privacy Notice",
-                disclaimerText: "All reports made through this platform are completely anonymous and will be handled with the utmost confidentiality. We are committed to investigating each report discreetly and professionally, ensuring the protection of the identity of those who submit reports.",
+                disclaimerText: "All reports made through this platform are completely anonymous and will be handled with the utmost confidentiality. We do not collect any personal information about you. Our sole interest is to investigate individuals who reside illegally in Colorado Springs and have committed violent acts.",
                 infoTitle: "How It Works",
-                infoText: "Our platform allows you to report criminal or suspicious activities anonymously. Simply complete the report form with the necessary details, and our team will initiate a discreet investigation to address the reported situation.",
+                infoText: "Our platform allows you to report violent activities of individuals who reside illegally in Colorado Springs anonymously. Simply complete the report form with the necessary details, and our team will initiate a discreet investigation to address the reported situation.",
                 infoList: [
                     "Provide clear and precise information about the incident.",
                     "Avoid including personal data to maintain your anonymity.",
@@ -903,9 +903,9 @@
 
         // Elements to Translate
         const elementsToTranslate = {
-            title: document.getElementById('hero-title'),
-            subtitle: document.getElementById('hero-subtitle'),
-            button: document.getElementById('hero-button'),
+            heroTitle: document.getElementById('hero-title'),
+            heroSubtitle: document.getElementById('hero-subtitle'),
+            heroButton: document.getElementById('hero-button'),
             formLegend: document.getElementById('form-legend'),
             labelName: document.getElementById('label-name'),
             inputName: document.getElementById('reporter-name'),
@@ -933,11 +933,6 @@
             footerText: document.getElementById('footer-text'),
             navbarLinks: document.querySelectorAll('.navbar-link')
         };
-
-        // Hero Section Elements
-        elementsToTranslate.heroTitle = document.getElementById('hero-title');
-        elementsToTranslate.heroSubtitle = document.getElementById('hero-subtitle');
-        elementsToTranslate.heroButton = document.getElementById('hero-button');
 
         // Function to Update Language
         function updateLanguage(lang) {
