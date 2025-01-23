@@ -1,1051 +1,1167 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plataforma de Reporte Anónimo</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Lora:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTTXRMfOPKhOnjUORbk6F8i6sPUhiNK5kNf9kKUWcWfhlR9TZJh5IOq32bDn5cSjNefFckVt2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Stylesheet -->
-    <style>
-        /* CSS Variables for Consistent Styling */
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --accent-color: #27ae60;
-            --background-color: #f5f7fa;
-            --light-color: #ffffff;
-            --dark-color: #333333;
-            --font-primary: 'Roboto', sans-serif;
-            --font-secondary: 'Lora', serif;
-            --transition-speed: 0.3s;
-            --max-width: 1200px;
-        }
-
-        /* Reset and Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: var(--font-primary);
-            background-color: var(--background-color);
-            color: var(--dark-color);
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        /* Smooth Scroll */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Navbar Styles */
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background-color: var(--primary-color);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            transition: background-color var(--transition-speed);
-        }
-
-        .navbar-container {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 15px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .navbar-logo {
-            color: var(--light-color);
-            font-family: var(--font-secondary);
-            font-size: 1.8rem;
-            font-weight: 700;
-            text-decoration: none;
-            transition: color var(--transition-speed);
-        }
-
-        .navbar-logo:hover {
-            color: var(--secondary-color);
-        }
-
-        .navbar-menu {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-        }
-
-        .navbar-item {
-            
-        }
-
-        .navbar-link {
-            color: var(--light-color);
-            text-decoration: none;
-            font-size: 1rem;
-            font-weight: 500;
-            position: relative;
-            transition: color var(--transition-speed);
-        }
-
-        .navbar-link::after {
-            content: '';
-            position: absolute;
-            width: 0%;
-            height: 2px;
-            bottom: -3px;
-            left: 0;
-            background-color: var(--accent-color);
-            transition: width var(--transition-speed);
-        }
-
-        .navbar-link:hover {
-            color: var(--accent-color);
-        }
-
-        .navbar-link:hover::after {
-            width: 100%;
-        }
-
-        /* Active Navbar Link */
-        .navbar-link.active {
-            color: var(--accent-color);
-        }
-
-        .navbar-link.active::after {
-            width: 100%;
-        }
-
-        /* Language Toggle Button */
-        .language-toggle-button {
-            background-color: var(--secondary-color);
-            border: none;
-            color: var(--light-color);
-            padding: 8px 16px;
-            font-size: 0.9rem;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color var(--transition-speed);
-            font-weight: 500;
-        }
-
-        .language-toggle-button:hover {
-            background-color: #2980b9;
-        }
-
-        /* Hero Section Styles */
-        .hero-section {
-            background: url('https://images.unsplash.com/photo-1508830524289-0adcbe822b40?auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            margin-top: 60px; /* Height of navbar */
-        }
-
-        .hero-section::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(44, 62, 80, 0.6);
-        }
-
-        .hero-content {
-            position: relative;
-            text-align: center;
-            color: var(--light-color);
-            max-width: 800px;
-            padding: 0 20px;
-        }
-
-        .hero-title {
-            font-family: var(--font-secondary);
-            font-size: 3rem;
-            margin-bottom: 20px;
-            animation: fadeInDown 1s ease forwards;
-        }
-
-        .hero-subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            animation: fadeInUp 1.5s ease forwards;
-        }
-
-        .hero-button {
-            background-color: var(--accent-color);
-            color: var(--light-color);
-            padding: 12px 30px;
-            font-size: 1.1rem;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: background-color var(--transition-speed), transform var(--transition-speed);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            animation: fadeInUp 2s ease forwards;
-        }
-
-        .hero-button:hover {
-            background-color: #1e8449;
-            transform: translateY(-3px);
-        }
-
-        /* Main Content Styles */
-        .main-container {
-            flex: 1;
-            padding: 100px 40px 40px 40px; /* Extra padding-top to account for fixed navbar and hero section */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* Report Form Section */
-        .report-form-section {
-            background-color: var(--light-color);
-            padding: 40px 60px;
-            border-radius: 15px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 700px;
-            margin-bottom: 60px;
-            transform: translateY(30px);
-            opacity: 0;
-            animation: slideUp 1s forwards;
-        }
-
-        .anonymous-report-form {
-            width: 100%;
-        }
-
-        .form-fieldset {
-            border: none;
-        }
-
-        .form-legend {
-            font-family: var(--font-secondary);
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            color: var(--primary-color);
-            text-align: center;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-            position: relative;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: 600;
-            font-size: 1rem;
-        }
-
-        .form-input,
-        .form-select,
-        .form-textarea {
-            width: 100%;
-            padding: 12px 20px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
-        }
-
-        .form-input:focus,
-        .form-select:focus,
-        .form-textarea:focus {
-            border-color: var(--secondary-color);
-            box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
-            outline: none;
-        }
-
-        .form-select {
-            appearance: none;
-            background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"><path fill="%23343948" d="M6 9.5L1.5 4h9L6 9.5z"/></svg>');
-            background-repeat: no-repeat;
-            background-position: right 15px center;
-            background-size: 12px;
-            cursor: pointer;
-        }
-
-        .disclaimer-group {
-            font-size: 0.85rem;
-            color: #7f8c8d;
-            margin-bottom: 15px;
-        }
-
-        .form-disclaimer,
-        .form-note {
-            margin-bottom: 5px;
-        }
-
-        .form-submit-button {
-            background-color: var(--accent-color);
-            color: var(--light-color);
-            padding: 14px 35px;
-            border: none;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: background-color var(--transition-speed), transform var(--transition-speed);
-            width: 100%;
-            font-weight: 600;
-            box-shadow: 0 6px 12px rgba(39, 174, 96, 0.3);
-        }
-
-        .form-submit-button:hover {
-            background-color: #1e8449;
-            transform: translateY(-2px);
-        }
-
-        /* Disclaimer Section */
-        .disclaimer-section {
-            background: linear-gradient(135deg, #ffffff, #ece9e6);
-            padding: 50px 30px;
-            width: 100%;
-            max-width: 900px;
-            border-radius: 15px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            margin-bottom: 60px;
-            transform: translateY(30px);
-            opacity: 0;
-            animation: slideUp 1.2s forwards;
-        }
-
-        .disclaimer-content {
-            text-align: center;
-        }
-
-        .disclaimer-title {
-            font-family: var(--font-secondary);
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-        }
-
-        .disclaimer-text {
-            font-size: 1rem;
-            color: #555555;
-            line-height: 1.8;
-        }
-
-        /* Informational Section */
-        .info-section {
-            background-color: var(--light-color);
-            padding: 50px 30px;
-            width: 100%;
-            max-width: 900px;
-            border-radius: 15px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            margin-bottom: 60px;
-            transform: translateY(30px);
-            opacity: 0;
-            animation: slideUp 1.4s forwards;
-        }
-
-        .info-content {
-            text-align: left;
-        }
-
-        .info-title {
-            font-family: var(--font-secondary);
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-        }
-
-        .info-text {
-            font-size: 1rem;
-            color: #555555;
-            margin-bottom: 20px;
-            line-height: 1.8;
-        }
-
-        .info-list {
-            list-style-type: disc;
-            padding-left: 40px;
-        }
-
-        .info-list li {
-            margin-bottom: 15px;
-            font-size: 1rem;
-            color: #555555;
-            position: relative;
-            padding-left: 10px;
-        }
-
-        .info-list li::before {
-            content: "\2022";
-            position: absolute;
-            left: -20px;
-            color: var(--secondary-color);
-        }
-
-        /* Resources Section */
-        .resources-section {
-            background: linear-gradient(135deg, #ece9e6, #ffffff);
-            padding: 50px 30px;
-            width: 100%;
-            max-width: 900px;
-            border-radius: 15px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            margin-bottom: 60px;
-            transform: translateY(30px);
-            opacity: 0;
-            animation: slideUp 1.6s forwards;
-        }
-
-        .resources-content {
-            text-align: left;
-        }
-
-        .resources-title {
-            font-family: var(--font-secondary);
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-        }
-
-        .resources-text {
-            font-size: 1rem;
-            color: #555555;
-            margin-bottom: 20px;
-            line-height: 1.8;
-        }
-
-        .resources-list {
-            list-style-type: none;
-            padding-left: 0;
-        }
-
-        .resources-list li {
-            margin-bottom: 15px;
-            font-size: 1rem;
-            color: #555555;
-        }
-
-        .resources-link {
-            color: var(--secondary-color);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color var(--transition-speed);
-        }
-
-        .resources-link:hover {
-            color: #1e8449;
-            text-decoration: underline;
-        }
-
-        /* Footer Styles */
-        .footer-container {
-            background-color: var(--primary-color);
-            padding: 20px 40px;
-            color: var(--light-color);
-            text-align: center;
-        }
-
-        .footer-text {
-            font-size: 0.9rem;
-        }
-
-        /* Animations */
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Hero Section Animations */
-        .hero-title {
-            animation: fadeInDown 1s ease forwards;
-        }
-
-        .hero-subtitle {
-            animation: fadeInUp 1.5s ease forwards;
-        }
-
-        .hero-button {
-            animation: fadeInUp 2s ease forwards;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1200px) {
-            .navbar-container {
-                padding: 15px 30px;
-            }
-
-            .report-form-section,
-            .disclaimer-section,
-            .info-section,
-            .resources-section {
-                padding: 40px 20px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .navbar-menu {
-                display: none;
-            }
-
-            .navbar-container {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .language-toggle-button {
-                margin-top: 10px;
-            }
-
-            .hero-title {
-                font-size: 2.5rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1.2rem;
-            }
-
-            .form-legend,
-            .disclaimer-title,
-            .info-title,
-            .resources-title {
-                font-size: 1.5rem;
-            }
-
-            .hero-button {
-                padding: 10px 25px;
-                font-size: 1rem;
-            }
-        }
-
-        /* Dark Mode Styles (Optional) */
-        body.dark-mode {
-            --primary-color: #1e2a38;
-            --secondary-color: #2980b9;
-            --accent-color: #27ae60;
-            --background-color: #2c3e50;
-            --light-color: #ecf0f1;
-            --dark-color: #bdc3c7;
-        }
-
-        body.dark-mode .navbar {
-            background-color: var(--primary-color);
-        }
-
-        body.dark-mode .navbar-logo,
-        body.dark-mode .navbar-link,
-        body.dark-mode .language-toggle-button {
-            color: var(--light-color);
-        }
-
-        body.dark-mode .navbar-link:hover {
-            color: var(--accent-color);
-        }
-
-        body.dark-mode .disclaimer-section,
-        body.dark-mode .info-section,
-        body.dark-mode .resources-section,
-        body.dark-mode .report-form-section {
-            background-color: #34495e;
-            color: var(--light-color);
-        }
-
-        body.dark-mode .form-input,
-        body.dark-mode .form-select,
-        body.dark-mode .form-textarea {
-            background-color: #2c3e50;
-            border: 1px solid #34495e;
-            color: var(--light-color);
-        }
-
-        body.dark-mode .form-submit-button {
-            background-color: var(--accent-color);
-        }
-
-        body.dark-mode .form-submit-button:hover {
-            background-color: #1e8449;
-        }
-
-        body.dark-mode .disclaimer-section {
-            background: linear-gradient(135deg, #34495e, #2c3e50);
-        }
-
-        body.dark-mode .info-section {
-            background-color: #2c3e50;
-        }
-
-        body.dark-mode .resources-section {
-            background: linear-gradient(135deg, #2c3e50, #34495e);
-        }
-
-        body.dark-mode .resources-link {
-            color: var(--secondary-color);
-        }
-
-        body.dark-mode .resources-link:hover {
-            color: #1e8449;
-        }
-
-        /* Dark Mode Toggle Button */
-        .dark-mode-toggle {
-            background: none;
-            border: none;
-            color: var(--light-color);
-            font-size: 1.2rem;
-            cursor: pointer;
-            margin-left: 15px;
-            transition: color var(--transition-speed);
-        }
-
-        .dark-mode-toggle:hover {
-            color: var(--accent-color);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plataforma de Reporte Anónimo</title>
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Lora:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+  <!-- Font Awesome for Icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    integrity="sha512-Fo3rlrZj/k7ujTTXRMfOPKhOnjUORbk6F8i6sPUhiNK5kNf9kKUWcWfhlR9TZJh5IOq32bDn5cSjNefFckVt2A=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <!-- Stylesheet -->
+  <style>
+    :root {
+      --primary-color: #2c3e50;
+      --secondary-color: #3498db;
+      --accent-color: #27ae60;
+      --background-color: #f5f7fa;
+      --light-color: #ffffff;
+      --dark-color: #333333;
+      --font-primary: "Roboto", sans-serif;
+      --font-secondary: "Lora", serif;
+      --transition-speed: 0.3s;
+      --max-width: 1200px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-primary);
+      background-color: var(--background-color);
+      color: var(--dark-color);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      scroll-behavior: smooth;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: var(--primary-color);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      transition: background-color var(--transition-speed);
+    }
+    .navbar-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .navbar-logo {
+      color: var(--light-color);
+      font-family: var(--font-secondary);
+      font-size: 1.8rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: color var(--transition-speed);
+    }
+    .navbar-logo:hover {
+      color: var(--secondary-color);
+    }
+    .navbar-menu {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+    .navbar-item {}
+    .navbar-link {
+      color: var(--light-color);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      position: relative;
+      transition: color var(--transition-speed);
+    }
+    .navbar-link::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -3px;
+      left: 0;
+      background-color: var(--accent-color);
+      transition: width var(--transition-speed);
+    }
+    .navbar-link:hover {
+      color: var(--accent-color);
+    }
+    .navbar-link:hover::after {
+      width: 100%;
+    }
+    .navbar-link.active {
+      color: var(--accent-color);
+    }
+    .navbar-link.active::after {
+      width: 100%;
+    }
+    .language-toggle-button {
+      background-color: var(--secondary-color);
+      border: none;
+      color: var(--light-color);
+      padding: 8px 16px;
+      font-size: 0.9rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color var(--transition-speed);
+      font-weight: 500;
+    }
+    .language-toggle-button:hover {
+      background-color: #2980b9;
+    }
+
+    /* HERO */
+    .hero-section {
+      background: url("https://images.unsplash.com/photo-1508830524289-0adcbe822b40?auto=format&fit=crop&w=1950&q=80")
+        no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-top: 60px;
+    }
+    .hero-section::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(44, 62, 80, 0.6);
+    }
+    .hero-content {
+      position: relative;
+      text-align: center;
+      color: var(--light-color);
+      max-width: 800px;
+      padding: 0 20px;
+    }
+    .hero-title {
+      font-family: var(--font-secondary);
+      font-size: 3rem;
+      margin-bottom: 20px;
+      animation: fadeInDown 1s ease forwards;
+    }
+    .hero-subtitle {
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+      animation: fadeInUp 1.5s ease forwards;
+    }
+    .hero-button {
+      background-color: var(--accent-color);
+      color: var(--light-color);
+      padding: 12px 30px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color var(--transition-speed), transform var(--transition-speed);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      animation: fadeInUp 2s ease forwards;
+    }
+    .hero-button:hover {
+      background-color: #1e8449;
+      transform: translateY(-3px);
+    }
+
+    /* MAIN CONTAINER */
+    .main-container {
+      flex: 1;
+      padding: 100px 40px 40px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* REPORT FORM SECTION */
+    .report-form-section {
+      background-color: var(--light-color);
+      padding: 40px 60px;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 700px;
+      margin-bottom: 60px;
+      transform: translateY(30px);
+      opacity: 0;
+      animation: slideUp 1s forwards;
+    }
+    .anonymous-report-form {
+      width: 100%;
+    }
+    .form-fieldset {
+      border: none;
+    }
+    .form-legend {
+      font-family: var(--font-secondary);
+      font-size: 1.8rem;
+      margin-bottom: 25px;
+      color: var(--primary-color);
+      text-align: center;
+    }
+    .form-group {
+      margin-bottom: 25px;
+      position: relative;
+    }
+    .form-label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      padding: 12px 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+    }
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-color: var(--secondary-color);
+      box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+      outline: none;
+    }
+    .form-select {
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12'><path fill='%23343948' d='M6 9.5L1.5 4h9L6 9.5z'/></svg>");
+      background-repeat: no-repeat;
+      background-position: right 15px center;
+      background-size: 12px;
+      cursor: pointer;
+    }
+    .disclaimer-group {
+      font-size: 0.85rem;
+      color: #7f8c8d;
+      margin-bottom: 15px;
+    }
+    .form-disclaimer,
+    .form-note {
+      margin-bottom: 5px;
+    }
+    .form-submit-button {
+      background-color: var(--accent-color);
+      color: var(--light-color);
+      padding: 14px 35px;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background-color var(--transition-speed), transform var(--transition-speed);
+      width: 100%;
+      font-weight: 600;
+      box-shadow: 0 6px 12px rgba(39, 174, 96, 0.3);
+    }
+    .form-submit-button:hover {
+      background-color: #1e8449;
+      transform: translateY(-2px);
+    }
+
+    /* DISCLAIMER SECTION */
+    .disclaimer-section {
+      background: linear-gradient(135deg, #ffffff, #ece9e6);
+      padding: 50px 30px;
+      width: 100%;
+      max-width: 900px;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      margin-bottom: 60px;
+      transform: translateY(30px);
+      opacity: 0;
+      animation: slideUp 1.2s forwards;
+    }
+    .disclaimer-content {
+      text-align: center;
+    }
+    .disclaimer-title {
+      font-family: var(--font-secondary);
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+    }
+    .disclaimer-text {
+      font-size: 1rem;
+      color: #555555;
+      line-height: 1.8;
+    }
+
+    /* INFO SECTION */
+    .info-section {
+      background-color: var(--light-color);
+      padding: 50px 30px;
+      width: 100%;
+      max-width: 900px;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      margin-bottom: 60px;
+      transform: translateY(30px);
+      opacity: 0;
+      animation: slideUp 1.4s forwards;
+    }
+    .info-content {
+      text-align: left;
+    }
+    .info-title {
+      font-family: var(--font-secondary);
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+    }
+    .info-text {
+      font-size: 1rem;
+      color: #555555;
+      margin-bottom: 20px;
+      line-height: 1.8;
+    }
+    .info-list {
+      list-style-type: disc;
+      padding-left: 40px;
+    }
+    .info-list li {
+      margin-bottom: 15px;
+      font-size: 1rem;
+      color: #555555;
+      position: relative;
+      padding-left: 10px;
+    }
+    .info-list li::before {
+      content: "•";
+      position: absolute;
+      left: -20px;
+      color: var(--secondary-color);
+    }
+
+    /* RESOURCES SECTION */
+    .resources-section {
+      background: linear-gradient(135deg, #ece9e6, #ffffff);
+      padding: 50px 30px;
+      width: 100%;
+      max-width: 900px;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      margin-bottom: 60px;
+      transform: translateY(30px);
+      opacity: 0;
+      animation: slideUp 1.6s forwards;
+    }
+    .resources-content {
+      text-align: left;
+    }
+    .resources-title {
+      font-family: var(--font-secondary);
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+    }
+    .resources-text {
+      font-size: 1rem;
+      color: #555555;
+      margin-bottom: 20px;
+      line-height: 1.8;
+    }
+    .resources-list {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    .resources-list li {
+      margin-bottom: 15px;
+      font-size: 1rem;
+      color: #555555;
+    }
+    .resources-link {
+      color: var(--secondary-color);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color var(--transition-speed);
+    }
+    .resources-link:hover {
+      color: #1e8449;
+      text-decoration: underline;
+    }
+
+    /* FOOTER */
+    .footer-container {
+      background-color: var(--primary-color);
+      padding: 20px 40px;
+      color: var(--light-color);
+      text-align: center;
+    }
+    .footer-text {
+      font-size: 0.9rem;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1200px) {
+      .navbar-container {
+        padding: 15px 30px;
+      }
+      .report-form-section,
+      .disclaimer-section,
+      .info-section,
+      .resources-section {
+        padding: 40px 20px;
+      }
+    }
+    @media (max-width: 768px) {
+      .navbar-menu {
+        display: none;
+      }
+      .navbar-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .language-toggle-button {
+        margin-top: 10px;
+      }
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      .hero-subtitle {
+        font-size: 1.2rem;
+      }
+      .form-legend,
+      .disclaimer-title,
+      .info-title,
+      .resources-title {
+        font-size: 1.5rem;
+      }
+      .hero-button {
+        padding: 10px 25px;
+        font-size: 1rem;
+      }
+    }
+
+    /* DARK MODE (OPTIONAL) */
+    body.dark-mode {
+      --primary-color: #1e2a38;
+      --secondary-color: #2980b9;
+      --accent-color: #27ae60;
+      --background-color: #2c3e50;
+      --light-color: #ecf0f1;
+      --dark-color: #bdc3c7;
+    }
+    body.dark-mode .navbar {
+      background-color: var(--primary-color);
+    }
+    body.dark-mode .navbar-logo,
+    body.dark-mode .navbar-link,
+    body.dark-mode .language-toggle-button {
+      color: var(--light-color);
+    }
+    body.dark-mode .navbar-link:hover {
+      color: var(--accent-color);
+    }
+    body.dark-mode .disclaimer-section,
+    body.dark-mode .info-section,
+    body.dark-mode .resources-section,
+    body.dark-mode .report-form-section {
+      background-color: #34495e;
+      color: var(--light-color);
+    }
+    body.dark-mode .form-input,
+    body.dark-mode .form-select,
+    body.dark-mode .form-textarea {
+      background-color: #2c3e50;
+      border: 1px solid #34495e;
+      color: var(--light-color);
+    }
+    body.dark-mode .form-submit-button {
+      background-color: var(--accent-color);
+    }
+    body.dark-mode .form-submit-button:hover {
+      background-color: #1e8449;
+    }
+    body.dark-mode .disclaimer-section {
+      background: linear-gradient(135deg, #34495e, #2c3e50);
+    }
+    body.dark-mode .info-section {
+      background-color: #2c3e50;
+    }
+    body.dark-mode .resources-section {
+      background: linear-gradient(135deg, #2c3e50, #34495e);
+    }
+    body.dark-mode .resources-link {
+      color: var(--secondary-color);
+    }
+    body.dark-mode .resources-link:hover {
+      color: #1e8449;
+    }
+    .dark-mode-toggle {
+      background: none;
+      border: none;
+      color: var(--light-color);
+      font-size: 1.2rem;
+      cursor: pointer;
+      margin-left: 15px;
+      transition: color var(--transition-speed);
+    }
+    .dark-mode-toggle:hover {
+      color: var(--accent-color);
+    }
+  </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="navbar-container">
-            <a href="#" class="navbar-logo">Reporte Anónimo</a>
-            <ul class="navbar-menu">
-                <li class="navbar-item"><a href="#report" class="navbar-link">Reporte</a></li>
-                <li class="navbar-item"><a href="#disclaimer" class="navbar-link">Aviso</a></li>
-                <li class="navbar-item"><a href="#info" class="navbar-link">Cómo Funciona</a></li>
-                <li class="navbar-item"><a href="#resources" class="navbar-link">Recursos</a></li>
-            </ul>
-            <div class="navbar-actions">
-                <button id="language-toggle-button" class="language-toggle-button">English</button>
-                <!-- Optional Dark Mode Toggle -->
-                <!-- <button class="dark-mode-toggle" aria-label="Toggle Dark Mode"><i class="fas fa-moon"></i></button> -->
-            </div>
-        </div>
-    </nav>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="#" class="navbar-logo">Reporte Anónimo</a>
+      <ul class="navbar-menu">
+        <li class="navbar-item"><a href="#report" class="navbar-link">Reporte</a></li>
+        <li class="navbar-item"><a href="#disclaimer" class="navbar-link">Aviso</a></li>
+        <li class="navbar-item"><a href="#info" class="navbar-link">Cómo Funciona</a></li>
+        <li class="navbar-item"><a href="#resources" class="navbar-link">Recursos</a></li>
+      </ul>
+      <div class="navbar-actions">
+        <button id="language-toggle-button" class="language-toggle-button">English</button>
+        <!-- <button class="dark-mode-toggle" aria-label="Toggle Dark Mode"><i class="fas fa-moon"></i></button> -->
+      </div>
+    </div>
+  </nav>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="hero-content">
-            <h1 class="hero-title" id="hero-title">Reporta Anónimamente</h1>
-            <p class="hero-subtitle" id="hero-subtitle">Tu seguridad y privacidad son nuestra prioridad.</p>
-            <a href="#report" class="hero-button" id="hero-button">Comienza Ahora</a>
-        </div>
+  <!-- HERO SECTION -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title" id="hero-title">Reporta Anónimamente</h1>
+      <p class="hero-subtitle" id="hero-subtitle">Tu seguridad y privacidad son nuestra prioridad.</p>
+      <a href="#report" class="hero-button" id="hero-button">Comienza Ahora</a>
+    </div>
+  </section>
+
+  <!-- MAIN -->
+  <main class="main-container">
+    <!-- REPORT FORM SECTION -->
+    <section id="report" class="report-form-section">
+      <form
+        id="anonymous-report-form"
+        class="anonymous-report-form"
+        action="https://formsubmit.co/ethanvaldez986@gmail.com"
+        method="POST"
+        novalidate
+      >
+        <!-- Hidden Fields for FormSubmit -->
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_subject" value="Nuevo Reporte Anónimo" />
+
+        <!-- FIELDSET -->
+        <fieldset class="form-fieldset">
+          <legend class="form-legend" id="form-legend">Detalles del Reporte</legend>
+
+          <div class="form-group">
+            <label for="suspect-name" class="form-label" id="label-suspect-name">Nombre del Individuo:</label>
+            <input
+              type="text"
+              id="suspect-name"
+              name="suspectName"
+              class="form-input"
+              placeholder="Ingrese el nombre del individuo reportado..."
+              required
+              aria-required="true"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="suspect-address" class="form-label" id="label-suspect-address">Dirección del Individuo:</label>
+            <input
+              type="text"
+              id="suspect-address"
+              name="suspectAddress"
+              class="form-input"
+              placeholder="Ingrese la dirección donde se encuentra..."
+              required
+              aria-required="true"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="crime-type" class="form-label" id="label-crime">Tipo de Delito:</label>
+            <select id="crime-type" name="crimeType" class="form-select" aria-required="true" required>
+              <option value="" disabled selected id="select-crime-placeholder">Seleccione el tipo de delito</option>
+              <option value="theft" id="option-theft">Robo</option>
+              <option value="assault" id="option-assault">Asalto</option>
+              <option value="fraud" id="option-fraud">Fraude</option>
+              <option value="violent_crime" id="option-violent-crime">Crimen Violento</option>
+              <option value="other" id="option-other">Otro</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="dangerous" class="form-label" id="label-dangerous">¿Es Peligroso/Tiene Armas?</label>
+            <select id="dangerous" name="dangerous" class="form-select" aria-required="true" required>
+              <option value="" disabled selected>Seleccione una opción</option>
+              <option value="yes">Sí</option>
+              <option value="no">No</option>
+              <option value="unknown">Desconocido</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="additional-details" class="form-label" id="label-details">Detalles Adicionales:</label>
+            <textarea
+              id="additional-details"
+              name="additionalDetails"
+              class="form-textarea"
+              placeholder="Proporcione más información relevante..."
+              rows="5"
+              aria-required="true"
+              required
+            ></textarea>
+          </div>
+
+          <div class="form-group disclaimer-group">
+            <p class="form-disclaimer" id="disclaimer-text">
+              * No nos interesa la información sobre usted. Solo necesitamos detalles sobre el individuo que está
+              reportando.
+            </p>
+            <p class="form-note" id="note-text">
+              * Solo se investigarán individuos que residen ilegalmente en Colorado Springs y que han cometido actos
+              violentos.
+            </p>
+          </div>
+
+          <button type="submit" class="form-submit-button" id="submit-button">Enviar Reporte</button>
+        </fieldset>
+      </form>
     </section>
 
-    <main class="main-container">
-        <!-- Report Form Section -->
-        <section id="report" class="report-form-section">
-            <form 
-                id="anonymous-report-form" 
-                class="anonymous-report-form" 
-                action="https://formsubmit.co/ethanvaldez986@gmail.com" 
-                method="POST"
-                novalidate
+    <!-- DISCLAIMER SECTION -->
+    <section id="disclaimer" class="disclaimer-section">
+      <div class="disclaimer-content">
+        <h2 class="disclaimer-title" id="disclaimer-title">Aviso Legal y de Privacidad</h2>
+        <p class="disclaimer-text" id="disclaimer-text">
+          Todos los reportes realizados a través de esta plataforma son completamente anónimos y serán tratados con la
+          máxima confidencialidad. No recopilamos ninguna información personal sobre usted. Nuestro único interés es
+          investigar a individuos que residen ilegalmente en Colorado Springs y que han cometido actos violentos.
+        </p>
+      </div>
+    </section>
+
+    <!-- INFO SECTION -->
+    <section id="info" class="info-section">
+      <div class="info-content">
+        <h2 class="info-title" id="info-title">¿Cómo Funciona?</h2>
+        <p class="info-text" id="info-text">
+          Nuestra plataforma le permite reportar actividades violentas de individuos que residen ilegalmente en
+          Colorado Springs de manera anónima. Simplemente complete el formulario de reporte con los detalles
+          necesarios y nuestro equipo iniciará una investigación discreta para abordar la situación reportada.
+        </p>
+        <ul class="info-list" id="info-list">
+          <li>Proporcione información clara y precisa sobre el incidente.</li>
+          <li>Evite incluir datos personales para mantener su anonimato.</li>
+          <li>Nuestro equipo manejará cada reporte con seriedad y confidencialidad.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- RESOURCES SECTION -->
+    <section id="resources" class="resources-section">
+      <div class="resources-content">
+        <h2 class="resources-title" id="resources-title">Recursos y Apoyo</h2>
+        <p class="resources-text" id="resources-text">
+          Si usted o alguien que conoce está pasando por una situación difícil, por favor no dude en buscar ayuda.
+          A continuación, encontrará recursos útiles que pueden brindar asistencia:
+        </p>
+        <ul class="resources-list" id="resources-list">
+          <li>
+            <strong>Línea de Emergencias (911):</strong>
+            <a href="tel:911" class="resources-link">911</a>
+          </li>
+          <li>
+            <strong>Línea Nacional de Prevención del Suicidio (988):</strong>
+            <a href="tel:988" class="resources-link">988</a>
+          </li>
+          <li>
+            <strong>Línea de Ayuda contra la Violencia Doméstica:</strong>
+            <a href="tel:18007997233" class="resources-link">1-800-799-7233</a>
+          </li>
+          <li>
+            <strong>Servicios de Salud Mental:</strong>
+            <a
+              href="https://www.saludmental.com"
+              target="_blank"
+              class="resources-link"
             >
-                <!-- Hidden Fields for FormSubmit -->
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_subject" value="Nuevo Reporte Anónimo">
-                <!-- Optional: Redirect after submission -->
-                <!-- <input type="hidden" name="_redirect" value="https://yourdomain.com/thank-you.html"> -->
+              www.saludmental.com
+            </a>
+          </li>
+          <li>
+            <strong>Asistencia Legal Gratuita:</strong>
+            <a
+              href="https://www.asistencialegal.org"
+              target="_blank"
+              class="resources-link"
+            >
+              www.asistencialegal.org
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
 
-                <fieldset class="form-fieldset">
-                    <legend class="form-legend" id="form-legend">Detalles del Reporte</legend>
+  <!-- FOOTER -->
+  <footer class="footer-container">
+    <p class="footer-text" id="footer-text">
+      &copy; 2025 Plataforma de Reporte Anónimo. Todos los derechos reservados.
+    </p>
+  </footer>
 
-                    <div class="form-group">
-                        <label for="crime-type" class="form-label" id="label-crime">Tipo de Delito:</label>
-                        <select id="crime-type" name="crimeType" class="form-select" aria-required="true" required>
-                            <option value="" disabled selected id="select-crime-placeholder">Seleccione el tipo de delito</option>
-                            <option value="theft" id="option-theft">Robo</option>
-                            <option value="assault" id="option-assault">Asalto</option>
-                            <option value="fraud" id="option-fraud">Fraude</option>
-                            <option value="violent_crime" id="option-violent-crime">Crimen Violento</option>
-                            <option value="other" id="option-other">Otro</option>
-                        </select>
-                    </div>
+  <!-- JS -->
+  <script>
+    /**
+     * @class LanguageManager
+     * Handles bilingual translations for the page content.
+     */
+    class LanguageManager {
+      constructor() {
+        this.currentLanguage = "es";
+        this.languageToggleButton = document.getElementById("language-toggle-button");
 
-                    <div class="form-group">
-                        <label for="additional-details" class="form-label" id="label-details">Detalles Adicionales:</label>
-                        <textarea 
-                            id="additional-details" 
-                            name="additionalDetails" 
-                            class="form-textarea" 
-                            placeholder="Proporcione detalles adicionales aquí..." 
-                            rows="5" 
-                            aria-required="true"
-                            required
-                        ></textarea>
-                    </div>
+        // Collect relevant DOM elements
+        this.domRefs = {
+          heroTitle: document.getElementById("hero-title"),
+          heroSubtitle: document.getElementById("hero-subtitle"),
+          heroButton: document.getElementById("hero-button"),
 
-                    <div class="form-group disclaimer-group">
-                        <p class="form-disclaimer" id="disclaimer-text">* No nos interesa la información sobre usted. Solo necesitamos detalles sobre el individuo que está reportando.</p>
-                        <p class="form-note" id="note-text">* Solo se investigarán individuos que residen ilegalmente en Colorado Springs y que han cometido actos violentos.</p>
-                    </div>
+          // Form
+          formLegend: document.getElementById("form-legend"),
+          labelSuspectName: document.getElementById("label-suspect-name"),
+          suspectNameInput: document.getElementById("suspect-name"),
+          labelSuspectAddress: document.getElementById("label-suspect-address"),
+          suspectAddressInput: document.getElementById("suspect-address"),
+          labelCrime: document.getElementById("label-crime"),
+          selectCrimePlaceholder: document.getElementById("select-crime-placeholder"),
+          optionTheft: document.getElementById("option-theft"),
+          optionAssault: document.getElementById("option-assault"),
+          optionFraud: document.getElementById("option-fraud"),
+          optionViolentCrime: document.getElementById("option-violent-crime"),
+          optionOther: document.getElementById("option-other"),
+          labelDangerous: document.getElementById("label-dangerous"),
+          labelDetails: document.getElementById("label-details"),
+          textareaDetails: document.getElementById("additional-details"),
+          disclaimerText: document.getElementById("disclaimer-text"),
+          noteText: document.getElementById("note-text"),
+          submitButton: document.getElementById("submit-button"),
 
-                    <button type="submit" class="form-submit-button" id="submit-button">Enviar Reporte</button>
-                </fieldset>
-            </form>
-        </section>
+          // Disclaimer
+          disclaimerTitle: document.getElementById("disclaimer-title"),
+          disclaimerContent: document.querySelector(".disclaimer-text"), // same ID used, so query
 
-        <!-- Disclaimer Section -->
-        <section id="disclaimer" class="disclaimer-section">
-            <div class="disclaimer-content">
-                <h2 class="disclaimer-title" id="disclaimer-title">Aviso Legal y de Privacidad</h2>
-                <p class="disclaimer-text" id="disclaimer-text">
-                    Todos los reportes realizados a través de esta plataforma son completamente anónimos y serán tratados con la máxima confidencialidad. No recopilamos ninguna información personal sobre usted. Nuestro único interés es investigar a individuos que residen ilegalmente en Colorado Springs y que han cometido actos violentos.
-                </p>
-            </div>
-        </section>
+          // Info
+          infoTitle: document.getElementById("info-title"),
+          infoText: document.getElementById("info-text"),
+          infoList: document.getElementById("info-list"),
 
-        <!-- Informational Section -->
-        <section id="info" class="info-section">
-            <div class="info-content">
-                <h2 class="info-title" id="info-title">¿Cómo Funciona?</h2>
-                <p class="info-text" id="info-text">
-                    Nuestra plataforma le permite reportar actividades violentas de individuos que residen ilegalmente en Colorado Springs de manera anónima. Simplemente complete el formulario de reporte con los detalles necesarios y nuestro equipo iniciará una investigación discreta para abordar la situación reportada.
-                </p>
-                <ul class="info-list" id="info-list">
-                    <li>Proporcione información clara y precisa sobre el incidente.</li>
-                    <li>Evite incluir datos personales para mantener su anonimato.</li>
-                    <li>Nuestro equipo manejará cada reporte con seriedad y confidencialidad.</li>
-                </ul>
-            </div>
-        </section>
+          // Resources
+          resourcesTitle: document.getElementById("resources-title"),
+          resourcesText: document.getElementById("resources-text"),
+          resourcesList: document.getElementById("resources-list"),
 
-        <!-- Resources Section -->
-        <section id="resources" class="resources-section">
-            <div class="resources-content">
-                <h2 class="resources-title" id="resources-title">Recursos y Apoyo</h2>
-                <p class="resources-text" id="resources-text">
-                    Si usted o alguien que conoce está pasando por una situación difícil, por favor no dude en buscar ayuda. A continuación, encontrará recursos útiles que pueden brindar asistencia:
-                </p>
-                <ul class="resources-list" id="resources-list">
-                    <li>
-                        <strong id="resource-violence">Línea de Ayuda contra la Violencia:</strong> 
-                        <a href="tel:1234567890" class="resources-link">123-456-7890</a>
-                    </li>
-                    <li>
-                        <strong id="resource-mental">Servicios de Salud Mental:</strong> 
-                        <a href="https://www.saludmental.com" target="_blank" class="resources-link">www.saludmental.com</a>
-                    </li>
-                    <li>
-                        <strong id="resource-legal">Asistencia Legal Gratuita:</strong> 
-                        <a href="https://www.asistencialegal.org" target="_blank" class="resources-link">www.asistencialegal.org</a>
-                    </li>
-                </ul>
-            </div>
-        </section>
-    </main>
+          // Footer
+          footerText: document.getElementById("footer-text"),
 
-    <!-- Footer -->
-    <footer class="footer-container">
-        <p class="footer-text" id="footer-text">&copy; 2025 Plataforma de Reporte Anónimo. Todos los derechos reservados.</p>
-    </footer>
+          // Navbar Links
+          navbarLinks: document.querySelectorAll(".navbar-link"),
+        };
 
-    <!-- Embedded JavaScript -->
-    <script>
-        // Language Toggle Script
-        const languageToggleButton = document.getElementById('language-toggle-button');
-        // Optional Dark Mode Toggle Button
-        // const darkModeToggle = document.querySelector('.dark-mode-toggle');
+        // Translation content
+        this.translations = {
+          es: {
+            pageTitle: "Plataforma de Reporte Anónimo",
+            heroTitle: "Reporta Anónimamente",
+            heroSubtitle: "Tu seguridad y privacidad son nuestra prioridad.",
+            heroButton: "Comienza Ahora",
 
-        let currentLanguage = 'es'; // Default language is Spanish
-
-        const translations = {
-            es: {
-                title: "Plataforma de Reporte Anónimo",
-                reporterName: "Nombre:", // Removed
-                reporterNamePlaceholder: "Ingrese su nombre", // Removed
-                reporterLocation: "Ubicación en Colorado Springs:", // Removed
-                reporterLocationPlaceholder: "Ingrese su ubicación", // Removed
-                crimeType: "Tipo de Delito:",
-                crimeTypePlaceholder: "Seleccione el tipo de delito",
-                crimeOptions: {
-                    theft: "Robo",
-                    assault: "Asalto",
-                    fraud: "Fraude",
-                    violent_crime: "Crimen Violento",
-                    other: "Otro"
-                },
-                additionalDetails: "Detalles Adicionales:",
-                additionalDetailsPlaceholder: "Proporcione detalles adicionales aquí...",
-                disclaimer: "* No nos interesa la información sobre usted. Solo necesitamos detalles sobre el individuo que está reportando.",
-                note: "* Solo se investigarán individuos que residen ilegalmente en Colorado Springs y que han cometido actos violentos.",
-                submitButton: "Enviar Reporte",
-                footer: "© 2025 Plataforma de Reporte Anónimo. Todos los derechos reservados.",
-                formLegend: "Detalles del Reporte",
-                languageToggle: "English",
-                disclaimerTitle: "Aviso Legal y de Privacidad",
-                disclaimerText: "Todos los reportes realizados a través de esta plataforma son completamente anónimos y serán tratados con la máxima confidencialidad. No recopilamos ninguna información personal sobre usted. Nuestro único interés es investigar a individuos que residen ilegalmente en Colorado Springs y que han cometido actos violentos.",
-                infoTitle: "¿Cómo Funciona?",
-                infoText: "Nuestra plataforma le permite reportar actividades violentas de individuos que residen ilegalmente en Colorado Springs de manera anónima. Simplemente complete el formulario de reporte con los detalles necesarios y nuestro equipo iniciará una investigación discreta para abordar la situación reportada.",
-                infoList: [
-                    "Proporcione información clara y precisa sobre el incidente.",
-                    "Evite incluir datos personales para mantener su anonimato.",
-                    "Nuestro equipo manejará cada reporte con seriedad y confidencialidad."
-                ],
-                resourcesTitle: "Recursos y Apoyo",
-                resourcesText: "Si usted o alguien que conoce está pasando por una situación difícil, por favor no dude en buscar ayuda. A continuación, encontrará recursos útiles que pueden brindar asistencia:",
-                resourcesList: [
-                    { text: "Línea de Ayuda contra la Violencia:", link: "tel:1234567890" },
-                    { text: "Servicios de Salud Mental:", link: "https://www.saludmental.com" },
-                    { text: "Asistencia Legal Gratuita:", link: "https://www.asistencialegal.org" }
-                ],
-                heroTitle: "Reporta Anónimamente",
-                heroSubtitle: "Tu seguridad y privacidad son nuestra prioridad.",
-                heroButton: "Comienza Ahora"
+            formLegend: "Detalles del Reporte",
+            labelSuspectName: "Nombre del Individuo:",
+            suspectNamePlaceholder: "Ingrese el nombre del individuo reportado...",
+            labelSuspectAddress: "Dirección del Individuo:",
+            suspectAddressPlaceholder: "Ingrese la dirección donde se encuentra...",
+            labelCrime: "Tipo de Delito:",
+            crimeTypePlaceholder: "Seleccione el tipo de delito",
+            crimeOptions: {
+              theft: "Robo",
+              assault: "Asalto",
+              fraud: "Fraude",
+              violent_crime: "Crimen Violento",
+              other: "Otro",
             },
-            en: {
-                title: "Anonymous Reporting Platform",
-                reporterName: "Name:", // Removed
-                reporterNamePlaceholder: "Enter your name", // Removed
-                reporterLocation: "Location in Colorado Springs:", // Removed
-                reporterLocationPlaceholder: "Enter your location", // Removed
-                crimeType: "Type of Crime:",
-                crimeTypePlaceholder: "Select the type of crime",
-                crimeOptions: {
-                    theft: "Theft",
-                    assault: "Assault",
-                    fraud: "Fraud",
-                    violent_crime: "Violent Crime",
-                    other: "Other"
-                },
-                additionalDetails: "Additional Details:",
-                additionalDetailsPlaceholder: "Provide additional details here...",
-                disclaimer: "* We are not interested in information about you. We only need details about the individual you are reporting.",
-                note: "* Only individuals residing illegally in Colorado Springs and who have committed violent acts will be investigated.",
-                submitButton: "Submit Report",
-                footer: "© 2025 Anonymous Reporting Platform. All rights reserved.",
-                formLegend: "Report Details",
-                languageToggle: "Español",
-                disclaimerTitle: "Legal and Privacy Notice",
-                disclaimerText: "All reports made through this platform are completely anonymous and will be handled with the utmost confidentiality. We do not collect any personal information about you. Our sole interest is to investigate individuals who reside illegally in Colorado Springs and have committed violent acts.",
-                infoTitle: "How It Works",
-                infoText: "Our platform allows you to report violent activities of individuals who reside illegally in Colorado Springs anonymously. Simply complete the report form with the necessary details, and our team will initiate a discreet investigation to address the reported situation.",
-                infoList: [
-                    "Provide clear and precise information about the incident.",
-                    "Avoid including personal data to maintain your anonymity.",
-                    "Our team will handle each report with seriousness and confidentiality."
-                ],
-                resourcesTitle: "Resources and Support",
-                resourcesText: "If you or someone you know is going through a difficult situation, please do not hesitate to seek help. Below are useful resources that can provide assistance:",
-                resourcesList: [
-                    { text: "Violence Helpline:", link: "tel:1234567890" },
-                    { text: "Mental Health Services:", link: "https://www.mentalhealth.com" },
-                    { text: "Free Legal Assistance:", link: "https://www.freelegalhelp.org" }
-                ],
-                heroTitle: "Report Anonymously",
-                heroSubtitle: "Your safety and privacy are our priority.",
-                heroButton: "Get Started"
-            }
+            labelDangerous: "¿Es Peligroso/Tiene Armas?",
+            labelDetails: "Detalles Adicionales:",
+            additionalDetailsPlaceholder: "Proporcione más información relevante...",
+            disclaimer: "* No nos interesa la información sobre usted. Solo necesitamos detalles sobre el individuo que está reportando.",
+            note: "* Solo se investigarán individuos que residen ilegalmente en Colorado Springs y que han cometido actos violentos.",
+            submitButton: "Enviar Reporte",
+
+            disclaimerTitle: "Aviso Legal y de Privacidad",
+            disclaimerText:
+              "Todos los reportes realizados a través de esta plataforma son completamente anónimos y serán tratados con la máxima confidencialidad. No recopilamos ninguna información personal sobre usted. Nuestro único interés es investigar a individuos que residen ilegalmente en Colorado Springs y que han cometido actos violentos.",
+
+            infoTitle: "¿Cómo Funciona?",
+            infoText:
+              "Nuestra plataforma le permite reportar actividades violentas de individuos que residen ilegalmente en Colorado Springs de manera anónima. Simplemente complete el formulario de reporte con los detalles necesarios y nuestro equipo iniciará una investigación discreta para abordar la situación reportada.",
+            infoList: [
+              "Proporcione información clara y precisa sobre el incidente.",
+              "Evite incluir datos personales para mantener su anonimato.",
+              "Nuestro equipo manejará cada reporte con seriedad y confidencialidad.",
+            ],
+
+            resourcesTitle: "Recursos y Apoyo",
+            resourcesText:
+              "Si usted o alguien que conoce está pasando por una situación difícil, por favor no dude en buscar ayuda. A continuación, encontrará recursos útiles que pueden brindar asistencia:",
+            resourcesList: [
+              {
+                title: "Línea de Emergencias (911):",
+                link: "tel:911",
+                linkText: "911",
+              },
+              {
+                title: "Línea Nacional de Prevención del Suicidio (988):",
+                link: "tel:988",
+                linkText: "988",
+              },
+              {
+                title: "Línea de Ayuda contra la Violencia Doméstica:",
+                link: "tel:18007997233",
+                linkText: "1-800-799-7233",
+              },
+              {
+                title: "Servicios de Salud Mental:",
+                link: "https://www.saludmental.com",
+                linkText: "www.saludmental.com",
+              },
+              {
+                title: "Asistencia Legal Gratuita:",
+                link: "https://www.asistencialegal.org",
+                linkText: "www.asistencialegal.org",
+              },
+            ],
+
+            footer: "© 2025 Plataforma de Reporte Anónimo. Todos los derechos reservados.",
+            navbarLinks: {
+              Reporte: "Reporte",
+              Aviso: "Aviso",
+              ComoFunciona: "Cómo Funciona",
+              Recursos: "Recursos",
+            },
+            languageToggle: "English",
+          },
+          en: {
+            pageTitle: "Anonymous Reporting Platform",
+            heroTitle: "Report Anonymously",
+            heroSubtitle: "Your safety and privacy are our priority.",
+            heroButton: "Get Started",
+
+            formLegend: "Report Details",
+            labelSuspectName: "Individual's Name:",
+            suspectNamePlaceholder: "Enter the individual's name being reported...",
+            labelSuspectAddress: "Individual's Address:",
+            suspectAddressPlaceholder: "Enter the address where they may be found...",
+            labelCrime: "Type of Crime:",
+            crimeTypePlaceholder: "Select the type of crime",
+            crimeOptions: {
+              theft: "Theft",
+              assault: "Assault",
+              fraud: "Fraud",
+              violent_crime: "Violent Crime",
+              other: "Other",
+            },
+            labelDangerous: "Dangerous/Armed?",
+            labelDetails: "Additional Details:",
+            additionalDetailsPlaceholder: "Provide more relevant information...",
+            disclaimer: "* We are not interested in information about you. We only need details about the individual you are reporting.",
+            note: "* Only individuals residing illegally in Colorado Springs and who have committed violent acts will be investigated.",
+            submitButton: "Submit Report",
+
+            disclaimerTitle: "Legal and Privacy Notice",
+            disclaimerText:
+              "All reports made through this platform are completely anonymous and will be handled with the utmost confidentiality. We do not collect any personal information about you. Our sole interest is to investigate individuals who reside illegally in Colorado Springs and have committed violent acts.",
+
+            infoTitle: "How It Works",
+            infoText:
+              "Our platform allows you to report violent activities of individuals who reside illegally in Colorado Springs anonymously. Simply complete the report form with the necessary details, and our team will initiate a discreet investigation to address the reported situation.",
+            infoList: [
+              "Provide clear and precise information about the incident.",
+              "Avoid including personal data to maintain your anonymity.",
+              "Our team will handle each report with seriousness and confidentiality.",
+            ],
+
+            resourcesTitle: "Resources and Support",
+            resourcesText:
+              "If you or someone you know is going through a difficult situation, please do not hesitate to seek help. Below are useful resources that can provide assistance:",
+            resourcesList: [
+              {
+                title: "Emergency Services (911):",
+                link: "tel:911",
+                linkText: "911",
+              },
+              {
+                title: "Suicide and Crisis Lifeline (988):",
+                link: "tel:988",
+                linkText: "988",
+              },
+              {
+                title: "Domestic Violence Hotline:",
+                link: "tel:18007997233",
+                linkText: "1-800-799-7233",
+              },
+              {
+                title: "Mental Health Services:",
+                link: "https://www.mentalhealth.com",
+                linkText: "www.mentalhealth.com",
+              },
+              {
+                title: "Free Legal Assistance:",
+                link: "https://www.freelegalhelp.org",
+                linkText: "www.freelegalhelp.org",
+              },
+            ],
+
+            footer: "© 2025 Anonymous Reporting Platform. All rights reserved.",
+            navbarLinks: {
+              Reporte: "Report",
+              Aviso: "Notice",
+              ComoFunciona: "How It Works",
+              Recursos: "Resources",
+            },
+            languageToggle: "Español",
+          },
         };
+      }
 
-        // Elements to Translate
-        const elementsToTranslate = {
-            heroTitle: document.getElementById('hero-title'),
-            heroSubtitle: document.getElementById('hero-subtitle'),
-            heroButton: document.getElementById('hero-button'),
-            formLegend: document.getElementById('form-legend'),
-            labelCrime: document.getElementById('label-crime'),
-            selectCrimePlaceholder: document.getElementById('select-crime-placeholder'),
-            optionTheft: document.getElementById('option-theft'),
-            optionAssault: document.getElementById('option-assault'),
-            optionFraud: document.getElementById('option-fraud'),
-            optionViolentCrime: document.getElementById('option-violent-crime'),
-            optionOther: document.getElementById('option-other'),
-            labelDetails: document.getElementById('label-details'),
-            textareaDetails: document.getElementById('additional-details'),
-            disclaimerText: document.getElementById('disclaimer-text'),
-            noteText: document.getElementById('note-text'),
-            submitButton: document.getElementById('submit-button'),
-            disclaimerTitle: document.getElementById('disclaimer-title'),
-            disclaimerContent: document.getElementById('disclaimer-text'),
-            infoTitle: document.getElementById('info-title'),
-            infoText: document.getElementById('info-text'),
-            infoList: document.getElementById('info-list'),
-            resourcesTitle: document.getElementById('resources-title'),
-            resourcesText: document.getElementById('resources-text'),
-            resourcesList: document.getElementById('resources-list'),
-            footerText: document.getElementById('footer-text'),
-            navbarLinks: document.querySelectorAll('.navbar-link')
-        };
+      /**
+       * Initializes language toggle functionality and sets default language.
+       */
+      init() {
+        this.languageToggleButton.addEventListener("click", () => {
+          this.currentLanguage = this.currentLanguage === "es" ? "en" : "es";
+          this.updateLanguage(this.currentLanguage);
+        });
+        this.updateLanguage(this.currentLanguage);
+      }
 
-        // Function to Update Language
-        function updateLanguage(lang) {
-            const t = translations[lang];
+      /**
+       * Updates page content according to the selected language.
+       * @param {string} lang - Language code ("es" or "en").
+       */
+      updateLanguage(lang) {
+        const t = this.translations[lang];
 
-            // Update Hero Section
-            elementsToTranslate.heroTitle.textContent = t.heroTitle;
-            elementsToTranslate.heroSubtitle.textContent = t.heroSubtitle;
-            elementsToTranslate.heroButton.textContent = t.heroButton;
+        document.title = t.pageTitle;
 
-            // Update Form Section
-            elementsToTranslate.formLegend.textContent = t.formLegend;
-            elementsToTranslate.labelCrime.textContent = t.crimeType;
-            elementsToTranslate.selectCrimePlaceholder.textContent = t.crimeTypePlaceholder;
-            elementsToTranslate.optionTheft.textContent = t.crimeOptions.theft;
-            elementsToTranslate.optionAssault.textContent = t.crimeOptions.assault;
-            elementsToTranslate.optionFraud.textContent = t.crimeOptions.fraud;
-            elementsToTranslate.optionViolentCrime.textContent = t.crimeOptions.violent_crime;
-            elementsToTranslate.optionOther.textContent = t.crimeOptions.other;
-            elementsToTranslate.labelDetails.textContent = t.additionalDetails;
-            elementsToTranslate.textareaDetails.placeholder = t.additionalDetailsPlaceholder;
-            elementsToTranslate.disclaimerText.textContent = t.disclaimer;
-            elementsToTranslate.noteText.textContent = t.note;
-            elementsToTranslate.submitButton.textContent = t.submitButton;
+        // HERO
+        this.domRefs.heroTitle.textContent = t.heroTitle;
+        this.domRefs.heroSubtitle.textContent = t.heroSubtitle;
+        this.domRefs.heroButton.textContent = t.heroButton;
 
-            // Update Disclaimer Section
-            elementsToTranslate.disclaimerTitle.textContent = t.disclaimerTitle;
-            elementsToTranslate.disclaimerContent.textContent = t.disclaimerText;
+        // FORM
+        this.domRefs.formLegend.textContent = t.formLegend;
+        this.domRefs.labelSuspectName.textContent = t.labelSuspectName;
+        this.domRefs.suspectNameInput.placeholder = t.suspectNamePlaceholder;
+        this.domRefs.labelSuspectAddress.textContent = t.labelSuspectAddress;
+        this.domRefs.suspectAddressInput.placeholder = t.suspectAddressPlaceholder;
+        this.domRefs.labelCrime.textContent = t.labelCrime;
+        this.domRefs.selectCrimePlaceholder.textContent = t.crimeTypePlaceholder;
+        this.domRefs.optionTheft.textContent = t.crimeOptions.theft;
+        this.domRefs.optionAssault.textContent = t.crimeOptions.assault;
+        this.domRefs.optionFraud.textContent = t.crimeOptions.fraud;
+        this.domRefs.optionViolentCrime.textContent = t.crimeOptions.violent_crime;
+        this.domRefs.optionOther.textContent = t.crimeOptions.other;
+        this.domRefs.labelDangerous.textContent = t.labelDangerous;
+        this.domRefs.labelDetails.textContent = t.labelDetails;
+        this.domRefs.textareaDetails.placeholder = t.additionalDetailsPlaceholder;
+        this.domRefs.disclaimerText.textContent = t.disclaimer;
+        this.domRefs.noteText.textContent = t.note;
+        this.domRefs.submitButton.textContent = t.submitButton;
 
-            // Update Informational Section
-            elementsToTranslate.infoTitle.textContent = t.infoTitle;
-            elementsToTranslate.infoText.textContent = t.infoText;
+        // DISCLAIMER
+        this.domRefs.disclaimerTitle.textContent = t.disclaimerTitle;
+        this.domRefs.disclaimerContent.textContent = t.disclaimerText;
 
-            // Update Informational List
-            elementsToTranslate.infoList.innerHTML = '';
-            t.infoList.forEach(item => {
-                const li = document.createElement('li');
-                li.textContent = item;
-                elementsToTranslate.infoList.appendChild(li);
-            });
-
-            // Update Resources Section
-            elementsToTranslate.resourcesTitle.textContent = t.resourcesTitle;
-            elementsToTranslate.resourcesText.textContent = t.resourcesText;
-
-            // Update Resources List
-            elementsToTranslate.resourcesList.innerHTML = '';
-            t.resourcesList.forEach(item => {
-                const li = document.createElement('li');
-                const strong = document.createElement('strong');
-                strong.textContent = item.text;
-                const a = document.createElement('a');
-                a.href = item.link;
-                a.classList.add('resources-link');
-                a.textContent = item.link.startsWith('http') ? (lang === 'es' ? 'Visitar' : 'Visit') : item.link;
-                a.target = item.link.startsWith('http') ? '_blank' : '_self';
-                li.appendChild(strong);
-                li.appendChild(' ');
-                li.appendChild(a);
-                elementsToTranslate.resourcesList.appendChild(li);
-            });
-
-            // Update Footer
-            elementsToTranslate.footerText.textContent = t.footer;
-
-            // Update Navbar Links
-            elementsToTranslate.navbarLinks.forEach(link => {
-                const linkText = link.textContent.trim();
-                if (linkText === 'Reporte' || linkText === 'Report') {
-                    link.textContent = lang === 'es' ? 'Reporte' : 'Report';
-                } else if (linkText === 'Aviso' || linkText === 'Notice') {
-                    link.textContent = lang === 'es' ? 'Aviso' : 'Notice';
-                } else if (linkText === 'Cómo Funciona' || linkText === 'How It Works') {
-                    link.textContent = lang === 'es' ? 'Cómo Funciona' : 'How It Works';
-                } else if (linkText === 'Recursos' || linkText === 'Resources') {
-                    link.textContent = lang === 'es' ? 'Recursos' : 'Resources';
-                }
-            });
-
-            // Update Language Toggle Button Text
-            languageToggleButton.textContent = t.languageToggle;
-        }
-
-        // Event Listener for Language Toggle
-        languageToggleButton.addEventListener('click', () => {
-            currentLanguage = currentLanguage === 'es' ? 'en' : 'es';
-            updateLanguage(currentLanguage);
+        // INFO
+        this.domRefs.infoTitle.textContent = t.infoTitle;
+        this.domRefs.infoText.textContent = t.infoText;
+        this.domRefs.infoList.innerHTML = "";
+        t.infoList.forEach((item) => {
+          const li = document.createElement("li");
+          li.textContent = item;
+          this.domRefs.infoList.appendChild(li);
         });
 
-        // Initialize with Default Language
-        updateLanguage(currentLanguage);
+        // RESOURCES
+        this.domRefs.resourcesTitle.textContent = t.resourcesTitle;
+        this.domRefs.resourcesText.textContent = t.resourcesText;
+        this.domRefs.resourcesList.innerHTML = "";
+        t.resourcesList.forEach((r) => {
+          const li = document.createElement("li");
+          const strong = document.createElement("strong");
+          strong.textContent = r.title;
+          const link = document.createElement("a");
+          link.href = r.link;
+          link.classList.add("resources-link");
+          link.textContent = r.linkText;
+          link.target = r.link.startsWith("http") ? "_blank" : "_self";
 
-        // Optional: Dark Mode Toggle Functionality
-        /*
-        darkModeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            if (document.body.classList.contains('dark-mode')) {
-                darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-            } else {
-                darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-            }
-        });
-        */
-
-        // Scrollspy Implementation
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('.navbar-link');
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 100;
-                if (pageYOffset >= sectionTop) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
+          li.appendChild(strong);
+          li.appendChild(document.createTextNode(" "));
+          li.appendChild(link);
+          this.domRefs.resourcesList.appendChild(li);
         });
 
-        // Smooth Scroll for Navbar Links (Enhancement)
-        navLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href').substring(1);
-                const targetSection = document.getElementById(targetId);
-                window.scrollTo({
-                    top: targetSection.offsetTop - 60, // Adjust for navbar height
-                    behavior: 'smooth'
-                });
-            });
+        // FOOTER
+        this.domRefs.footerText.textContent = t.footer;
+
+        // NAVBAR LINKS
+        this.domRefs.navbarLinks.forEach((link) => {
+          const text = link.textContent.trim();
+          // We compare Spanish text to see if we can swap it
+          if (["Reporte", "Report"].includes(text)) {
+            link.textContent = lang === "es" ? t.navbarLinks.Reporte : t.navbarLinks.Reporte;
+            if (lang === "en") link.textContent = t.navbarLinks.Reporte;
+            if (lang === "es") link.textContent = t.navbarLinks.Reporte;
+            // In actual usage, we'd do a check to see if text is in Spanish or English,
+            // but for brevity, we just force the new language text
+            link.textContent = t.navbarLinks.Reporte;
+            if (lang === "en") link.textContent = t.navbarLinks.Reporte;
+          }
+          if (["Aviso", "Notice"].includes(text)) {
+            link.textContent = lang === "es" ? t.navbarLinks.Aviso : t.navbarLinks.Aviso;
+            if (lang === "en") link.textContent = t.navbarLinks.Aviso;
+          }
+          if (["Cómo Funciona", "How It Works"].includes(text)) {
+            link.textContent = lang === "es" ? t.navbarLinks.ComoFunciona : t.navbarLinks.ComoFunciona;
+            if (lang === "en") link.textContent = t.navbarLinks.ComoFunciona;
+          }
+          if (["Recursos", "Resources"].includes(text)) {
+            link.textContent = lang === "es" ? t.navbarLinks.Recursos : t.navbarLinks.Recursos;
+            if (lang === "en") link.textContent = t.navbarLinks.Recursos;
+          }
         });
-    </script>
+
+        // Finally, update the toggle button
+        this.languageToggleButton.textContent = t.languageToggle;
+      }
+    }
+
+    /**
+     * Manages scrolling behavior and link highlighting (scrollspy).
+     */
+    class ScrollManager {
+      constructor() {
+        this.sections = document.querySelectorAll("section");
+        this.navLinks = document.querySelectorAll(".navbar-link");
+      }
+
+      /**
+       * Initializes scroll events for scrollspy and smooth scrolling.
+       */
+      init() {
+        window.addEventListener("scroll", () => this.scrollSpyHandler());
+        this.navLinks.forEach((link) => {
+          link.addEventListener("click", (e) => this.smoothScrollHandler(e));
+        });
+      }
+
+      /**
+       * Highlights active navbar link based on current scroll position.
+       */
+      scrollSpyHandler() {
+        let current = "";
+        this.sections.forEach((section) => {
+          const sectionTop = section.offsetTop - 100;
+          if (pageYOffset >= sectionTop) {
+            current = section.getAttribute("id");
+          }
+        });
+        this.navLinks.forEach((link) => {
+          link.classList.remove("active");
+          if (link.getAttribute("href") === `#${current}`) {
+            link.classList.add("active");
+          }
+        });
+      }
+
+      /**
+       * Smooth scrolling for internal links.
+       * @param {Event} e - Click event
+       */
+      smoothScrollHandler(e) {
+        e.preventDefault();
+        const targetId = e.currentTarget.getAttribute("href").substring(1);
+        const targetSection = document.getElementById(targetId);
+        const offset = 60; // Approx navbar height
+        window.scrollTo({
+          top: targetSection.offsetTop - offset,
+          behavior: "smooth",
+        });
+      }
+    }
+
+    // Instantiate and Initialize Managers
+    const languageManager = new LanguageManager();
+    languageManager.init();
+
+    const scrollManager = new ScrollManager();
+    scrollManager.init();
+
+    // Optional: Dark mode toggling could be added here if desired
+  </script>
 </body>
 </html>
