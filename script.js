@@ -24,7 +24,23 @@ const translations = {
         submitButton: "Enviar Reporte",
         footer: "© 2025 Plataforma de Reporte Anónimo. Todos los derechos reservados.",
         formLegend: "Detalles del Reporte",
-        languageToggle: "English"
+        languageToggle: "English",
+        disclaimerTitle: "Aviso Legal y de Privacidad",
+        disclaimerText: "Todos los reportes realizados a través de esta plataforma son completamente anónimos y serán tratados con la máxima confidencialidad. Nos comprometemos a investigar cada reporte de manera discreta y profesional, garantizando la protección de la identidad de quienes realizan los reportes.",
+        infoTitle: "¿Cómo Funciona?",
+        infoText: "Nuestra plataforma le permite reportar actividades delictivas o sospechosas de manera anónima. Simplemente complete el formulario de reporte con los detalles necesarios y nuestro equipo iniciará una investigación discreta para abordar la situación reportada.",
+        infoList: [
+            "Proporcione información clara y precisa sobre el incidente.",
+            "Evite incluir datos personales para mantener su anonimato.",
+            "Nuestro equipo manejará cada reporte con seriedad y confidencialidad."
+        ],
+        resourcesTitle: "Recursos y Apoyo",
+        resourcesText: "Si usted o alguien que conoce está pasando por una situación difícil, por favor no dude en buscar ayuda. A continuación, encontrará recursos útiles que pueden brindar asistencia:",
+        resourcesList: [
+            { text: "Línea de Ayuda contra la Violencia:", link: "tel:1234567890" },
+            { text: "Servicios de Salud Mental:", link: "https://www.saludmental.com" },
+            { text: "Asistencia Legal Gratuita:", link: "https://www.asistencialegal.org" }
+        ]
     },
     en: {
         title: "Anonymous Reporting Platform",
@@ -47,7 +63,23 @@ const translations = {
         submitButton: "Submit Report",
         footer: "© 2025 Anonymous Reporting Platform. All rights reserved.",
         formLegend: "Report Details",
-        languageToggle: "Español"
+        languageToggle: "Español",
+        disclaimerTitle: "Legal and Privacy Notice",
+        disclaimerText: "All reports made through this platform are completely anonymous and will be handled with the utmost confidentiality. We are committed to investigating each report discreetly and professionally, ensuring the protection of the identity of those who submit reports.",
+        infoTitle: "How It Works",
+        infoText: "Our platform allows you to report criminal or suspicious activities anonymously. Simply complete the report form with the necessary details, and our team will initiate a discreet investigation to address the reported situation.",
+        infoList: [
+            "Provide clear and precise information about the incident.",
+            "Avoid including personal data to maintain your anonymity.",
+            "Our team will handle each report with seriousness and confidentiality."
+        ],
+        resourcesTitle: "Resources and Support",
+        resourcesText: "If you or someone you know is going through a difficult situation, please do not hesitate to seek help. Below are useful resources that can provide assistance:",
+        resourcesList: [
+            { text: "Violence Helpline:", link: "tel:1234567890" },
+            { text: "Mental Health Services:", link: "https://www.mentalhealth.com" },
+            { text: "Free Legal Assistance:", link: "https://www.freelegalhelp.org" }
+        ]
     }
 };
 
@@ -67,13 +99,22 @@ const elementsToTranslate = {
     submitButton: document.querySelector('.form-submit-button'),
     footerText: document.querySelector('.footer-text'),
     formLegend: document.querySelector('.form-legend'),
-    languageToggleButton: languageToggleButton
+    languageToggleButton: languageToggleButton,
+    disclaimerTitle: document.querySelector('.disclaimer-title'),
+    disclaimerText: document.querySelector('.disclaimer-text'),
+    infoTitle: document.querySelector('.info-title'),
+    infoText: document.querySelector('.info-text'),
+    infoList: document.querySelector('.info-list'),
+    resourcesTitle: document.querySelector('.resources-title'),
+    resourcesText: document.querySelector('.resources-text'),
+    resourcesList: document.querySelector('.resources-list')
 };
 
 // Function to Update Language
 function updateLanguage(lang) {
     const t = translations[lang];
 
+    // Update Header and Form Labels
     elementsToTranslate.title.textContent = t.title;
     elementsToTranslate.reporterNameLabel.textContent = t.reporterName;
     elementsToTranslate.reporterNameInput.placeholder = t.reporterNamePlaceholder;
@@ -98,6 +139,43 @@ function updateLanguage(lang) {
     elementsToTranslate.footerText.textContent = t.footer;
     elementsToTranslate.formLegend.textContent = t.formLegend;
     elementsToTranslate.languageToggleButton.textContent = t.languageToggle;
+
+    // Update Disclaimer Section
+    elementsToTranslate.disclaimerTitle.textContent = t.disclaimerTitle;
+    elementsToTranslate.disclaimerText.textContent = t.disclaimerText;
+
+    // Update Informational Section
+    elementsToTranslate.infoTitle.textContent = t.infoTitle;
+    elementsToTranslate.infoText.textContent = t.infoText;
+
+    // Update Informational List
+    elementsToTranslate.infoList.innerHTML = '';
+    t.infoList.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        elementsToTranslate.infoList.appendChild(li);
+    });
+
+    // Update Resources Section
+    elementsToTranslate.resourcesTitle.textContent = t.resourcesTitle;
+    elementsToTranslate.resourcesText.textContent = t.resourcesText;
+
+    // Update Resources List
+    elementsToTranslate.resourcesList.innerHTML = '';
+    t.resourcesList.forEach(item => {
+        const li = document.createElement('li');
+        const strong = document.createElement('strong');
+        strong.textContent = item.text;
+        const a = document.createElement('a');
+        a.href = item.link;
+        a.classList.add('resources-link');
+        a.textContent = item.link.startsWith('http') ? 'Visitar' : item.link;
+        a.target = item.link.startsWith('http') ? '_blank' : '_self';
+        li.appendChild(strong);
+        li.appendChild(' ');
+        li.appendChild(a);
+        elementsToTranslate.resourcesList.appendChild(li);
+    });
 }
 
 // Event Listener for Language Toggle
@@ -108,18 +186,3 @@ languageToggleButton.addEventListener('click', () => {
 
 // Initialize with Default Language
 updateLanguage(currentLanguage);
-
-// Form Submission Handler (Optional Enhancement)
-const reportForm = document.getElementById('anonymous-report-form');
-
-reportForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    // Here you can handle the form data, e.g., send it to a server
-    alert(currentLanguage === 'es' ? 'Reporte enviado exitosamente.' : 'Report submitted successfully.');
-    reportForm.reset();
-    // Reset to default language if needed
-    if (currentLanguage !== 'es') {
-        currentLanguage = 'es';
-        updateLanguage(currentLanguage);
-    }
-});
