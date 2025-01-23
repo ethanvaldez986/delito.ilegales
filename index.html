@@ -139,7 +139,7 @@
       align-items: center;
       justify-content: center;
       position: relative;
-      margin-top: 60px;
+      margin-top: 60px; /* space for the fixed navbar */
     }
     .hero-section::after {
       content: "";
@@ -168,22 +168,35 @@
       margin-bottom: 30px;
       animation: fadeInUp 1.5s ease forwards;
     }
-    .hero-button {
-      background-color: var(--accent-color);
-      color: var(--light-color);
-      padding: 12px 30px;
-      font-size: 1.1rem;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background-color var(--transition-speed), transform var(--transition-speed);
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      animation: fadeInUp 2s ease forwards;
+
+    /* SCROLL INDICATOR */
+    .scroll-down-indicator {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeInUp 2.2s ease forwards;
+      cursor: default; /* purely visual; no link, just an indicator */
     }
-    .hero-button:hover {
-      background-color: #1e8449;
-      transform: translateY(-3px);
+    .scroll-down-indicator i {
+      font-size: 1.8rem;
+      margin-bottom: 5px;
+      animation: bounce 2s infinite; /* A subtle bounce effect */
+    }
+    .scroll-down-indicator .scroll-text {
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(7px);
+      }
+      60% {
+        transform: translateY(4px);
+      }
     }
 
     /* MAIN CONTAINER */
@@ -207,7 +220,7 @@
       }
     }
 
-    /* INFO SECTION - MOVED ABOVE REPORT FORM SECTION */
+    /* INFO SECTION */
     .info-section {
       background-color: var(--light-color);
       padding: 50px 30px;
@@ -479,15 +492,11 @@
       .hero-subtitle {
         font-size: 1.2rem;
       }
+      .info-title,
       .form-legend,
       .disclaimer-title,
-      .info-title,
       .resources-title {
         font-size: 1.5rem;
-      }
-      .hero-button {
-        padding: 10px 25px;
-        font-size: 1rem;
       }
     }
 
@@ -574,14 +583,17 @@
     <div class="hero-content">
       <h1 class="hero-title" id="hero-title">Reporta Anónimamente</h1>
       <p class="hero-subtitle" id="hero-subtitle">Tu seguridad y privacidad son nuestra prioridad.</p>
-      <!-- ADD 'navbar-link' CLASS TO MAKE SMOOTH SCROLL WORK VIA THE SCROLL MANAGER -->
-      <a href="#report" class="hero-button navbar-link" id="hero-button">Comienza Ahora</a>
+      <!-- SCROLL INDICATOR -->
+      <div class="scroll-down-indicator" id="scroll-indicator">
+        <i class="fas fa-chevron-down"></i>
+        <span class="scroll-text">Desliza hacia abajo</span>
+      </div>
     </div>
   </section>
 
   <!-- MAIN -->
   <main class="main-container">
-    <!-- MOVED INFO SECTION ABOVE THE REPORT SECTION -->
+    <!-- INFO SECTION -->
     <section id="info" class="info-section">
       <div class="info-content">
         <h2 class="info-title" id="info-title">¿Cómo Funciona?</h2>
@@ -772,7 +784,6 @@
         this.domRefs = {
           heroTitle: document.getElementById("hero-title"),
           heroSubtitle: document.getElementById("hero-subtitle"),
-          heroButton: document.getElementById("hero-button"),
 
           // Form
           formLegend: document.getElementById("form-legend"),
@@ -821,7 +832,6 @@
             pageTitle: "Plataforma de Reporte Anónimo",
             heroTitle: "Reporta Anónimamente",
             heroSubtitle: "Tu seguridad y privacidad son nuestra prioridad.",
-            heroButton: "Comienza Ahora",
 
             formLegend: "Detalles del Reporte",
             labelSuspectName: "Nombre del Individuo:",
@@ -901,7 +911,6 @@
             pageTitle: "Anonymous Reporting Platform",
             heroTitle: "Report Anonymously",
             heroSubtitle: "Your safety and privacy are our priority.",
-            heroButton: "Get Started",
 
             formLegend: "Report Details",
             labelSuspectName: "Individual's Name:",
@@ -1003,7 +1012,6 @@
         // HERO
         this.domRefs.heroTitle.textContent = t.heroTitle;
         this.domRefs.heroSubtitle.textContent = t.heroSubtitle;
-        this.domRefs.heroButton.textContent = t.heroButton;
 
         // FORM
         this.domRefs.formLegend.textContent = t.formLegend;
@@ -1065,9 +1073,6 @@
         // NAVBAR LINKS
         this.domRefs.navbarLinks.forEach((link) => {
           const text = link.textContent.trim();
-
-          // For a real solution, we would check current language & text,
-          // but for simplicity we just replace with the correct translation:
           if (["Reporte", "Report"].includes(text)) {
             link.textContent = lang === "es" ? t.navbarLinks.Reporte : t.navbarLinks.Reporte;
             if (lang === "en") link.textContent = t.navbarLinks.Reporte;
