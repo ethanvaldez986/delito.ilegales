@@ -5,31 +5,52 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plataforma de Reporte Anónimo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTTXRMfOPKhOnjUORbk6F8i6sPUhiNK5kNf9kKUWcWfhlR9TZJh5IOq32bDn5cSjNefFckVt2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header class="header-container">
-        <div class="header-content">
-            <h1 class="header-title">Plataforma de Reporte Anónimo</h1>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="navbar-logo">Reporte Anónimo</a>
+            <ul class="navbar-menu">
+                <li class="navbar-item"><a href="#report" class="navbar-link">Reporte</a></li>
+                <li class="navbar-item"><a href="#disclaimer" class="navbar-link">Aviso</a></li>
+                <li class="navbar-item"><a href="#info" class="navbar-link">Cómo Funciona</a></li>
+                <li class="navbar-item"><a href="#resources" class="navbar-link">Recursos</a></li>
+            </ul>
             <button id="language-toggle-button" class="language-toggle-button">English</button>
         </div>
-    </header>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Reporta Anónimamente</h1>
+            <p class="hero-subtitle">Tu seguridad y privacidad son nuestra prioridad.</p>
+            <a href="#report" class="hero-button">Comienza Ahora</a>
+        </div>
+    </section>
 
     <main class="main-container">
-        <section class="report-form-section">
-            <!-- Updated Form Action and Method -->
+        <!-- Report Form Section -->
+        <section id="report" class="report-form-section">
             <form 
                 id="anonymous-report-form" 
                 class="anonymous-report-form" 
                 action="https://formsubmit.co/ethanvaldez986@gmail.com" 
                 method="POST"
+                novalidate
             >
                 <!-- Hidden Fields for FormSubmit -->
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="_subject" value="Nuevo Reporte Anónimo">
                 <!-- Optional: Redirect after submission -->
-                <!-- <input type="hidden" name="_redirect" value="https://your-redirect-url.com/thank-you"> -->
+                <!-- <input type="hidden" name="_redirect" value="https://yourdomain.com/thank-you.html"> -->
 
                 <fieldset class="form-fieldset">
                     <legend class="form-legend">Detalles del Reporte</legend>
@@ -42,6 +63,7 @@
                             name="reporterName" 
                             class="form-input" 
                             placeholder="Ingrese su nombre" 
+                            aria-required="true"
                             required
                         >
                     </div>
@@ -54,13 +76,14 @@
                             name="reporterLocation" 
                             class="form-input" 
                             placeholder="Ingrese su ubicación" 
+                            aria-required="true"
                             required
                         >
                     </div>
 
                     <div class="form-group">
                         <label for="crime-type" class="form-label">Tipo de Delito:</label>
-                        <select id="crime-type" name="crimeType" class="form-select" required>
+                        <select id="crime-type" name="crimeType" class="form-select" aria-required="true" required>
                             <option value="" disabled selected>Seleccione el tipo de delito</option>
                             <option value="theft">Robo</option>
                             <option value="assault">Asalto</option>
@@ -77,6 +100,7 @@
                             class="form-textarea" 
                             placeholder="Proporcione detalles adicionales aquí..." 
                             rows="5" 
+                            aria-required="true"
                             required
                         ></textarea>
                     </div>
@@ -92,7 +116,7 @@
         </section>
 
         <!-- Disclaimer Section -->
-        <section class="disclaimer-section">
+        <section id="disclaimer" class="disclaimer-section">
             <div class="disclaimer-content">
                 <h2 class="disclaimer-title">Aviso Legal y de Privacidad</h2>
                 <p class="disclaimer-text">
@@ -102,7 +126,7 @@
         </section>
 
         <!-- Informational Section -->
-        <section class="info-section">
+        <section id="info" class="info-section">
             <div class="info-content">
                 <h2 class="info-title">¿Cómo Funciona?</h2>
                 <p class="info-text">
@@ -117,7 +141,7 @@
         </section>
 
         <!-- Resources Section -->
-        <section class="resources-section">
+        <section id="resources" class="resources-section">
             <div class="resources-content">
                 <h2 class="resources-title">Recursos y Apoyo</h2>
                 <p class="resources-text">
@@ -141,10 +165,12 @@
         </section>
     </main>
 
+    <!-- Footer -->
     <footer class="footer-container">
         <p class="footer-text">&copy; 2025 Plataforma de Reporte Anónimo. Todos los derechos reservados.</p>
     </footer>
 
+    <!-- Scripts -->
     <script src="scripts.js"></script>
 </body>
 </html>
