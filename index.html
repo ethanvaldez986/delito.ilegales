@@ -1,62 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anonymous Reporting Platform</title>
+    <title>Plataforma de Reporte Anónimo</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
 </head>
 <body>
-    <header>
-        <div class="header-container">
-            <h1 class="header-title">Anonymous Reporting Platform</h1>
-            <p class="header-subtitle">Your voice matters. Report securely and confidentially.</p>
+    <header class="header-container">
+        <div class="header-content">
+            <h1 class="header-title">Plataforma de Reporte Anónimo</h1>
+            <button id="language-toggle-button" class="language-toggle-button">English</button>
         </div>
     </header>
-    <main>
-        <section class="intro-section">
-            <p class="intro-text">
-                Please provide information about individuals in Colorado Springs involved in criminal activities. Do not include any personal details about yourself. This platform is designed to assist in discreet investigations.
-            </p>
-        </section>
-        <section class="form-section">
-            <form action="https://formsubmit.co/ethanvaldez986@gmail.com" method="POST" class="report-form">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_template" value="table">
-                
-                <div class="form-group">
-                    <label for="reported-name" class="form-label">Person's Name:</label>
-                    <input type="text" id="reported-name" name="reported_name" class="form-input" placeholder="Full name of the individual" required>
-                </div>
 
-                <div class="form-group">
-                    <label for="location" class="form-label">Location in Colorado Springs:</label>
-                    <input type="text" id="location" name="location" class="form-input" placeholder="Address, area, or region" required>
-                </div>
+    <main class="main-container">
+        <section class="report-form-section">
+            <form id="anonymous-report-form" class="anonymous-report-form">
+                <fieldset class="form-fieldset">
+                    <legend class="form-legend">Detalles del Reporte</legend>
 
-                <div class="form-group">
-                    <label for="crime-type" class="form-label">Type of Felony:</label>
-                    <input type="text" id="crime-type" name="crime_type" class="form-input" placeholder="Describe the felony (e.g., assault, theft)" required>
-                </div>
+                    <div class="form-group">
+                        <label for="reporter-name" class="form-label">Nombre:</label>
+                        <input type="text" id="reporter-name" name="reporterName" class="form-input" placeholder="Ingrese su nombre" required>
+                    </div>
 
-                <div class="form-group">
-                    <label for="additional-details" class="form-label">Additional Details:</label>
-                    <textarea id="additional-details" name="additional_details" class="form-textarea" rows="5" placeholder="Include any relevant information about the individual or their actions"></textarea>
-                </div>
+                    <div class="form-group">
+                        <label for="reporter-location" class="form-label">Ubicación en Colorado Springs:</label>
+                        <input type="text" id="reporter-location" name="reporterLocation" class="form-input" placeholder="Ingrese su ubicación" required>
+                    </div>
 
-                <button type="submit" class="form-submit-button">Submit Report</button>
+                    <div class="form-group">
+                        <label for="crime-type" class="form-label">Tipo de Delito:</label>
+                        <select id="crime-type" name="crimeType" class="form-select" required>
+                            <option value="" disabled selected>Seleccione el tipo de delito</option>
+                            <option value="theft">Robo</option>
+                            <option value="assault">Asalto</option>
+                            <option value="fraud">Fraude</option>
+                            <option value="other">Otro</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="additional-details" class="form-label">Detalles Adicionales:</label>
+                        <textarea id="additional-details" name="additionalDetails" class="form-textarea" placeholder="Proporcione detalles adicionales aquí..." rows="5" required></textarea>
+                    </div>
+
+                    <div class="form-group disclaimer-group">
+                        <p class="form-disclaimer">* No incluya detalles personales sobre usted mismo en el reporte.</p>
+                        <p class="form-note">* El individuo reportado será investigado de manera discreta.</p>
+                    </div>
+
+                    <button type="submit" class="form-submit-button">Enviar Reporte</button>
+                </fieldset>
             </form>
         </section>
     </main>
-    <footer>
-        <p class="footer-disclaimer">
-            Disclaimer: This platform is for submitting anonymous reports about individuals suspected of criminal activities. 
-            Please DO NOT include any personal information about yourself. By submitting a report, you agree that the details provided may initiate an investigation.
-        </p>
-        <p class="footer-note">
-            Note: The individual reported will be discreetly investigated based on the information you provide.
-        </p>
+
+    <footer class="footer-container">
+        <p class="footer-text">&copy; 2025 Plataforma de Reporte Anónimo. Todos los derechos reservados.</p>
     </footer>
+
+    <script src="scripts.js"></script>
 </body>
 </html>
