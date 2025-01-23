@@ -169,7 +169,7 @@ function updateLanguage(lang) {
         const a = document.createElement('a');
         a.href = item.link;
         a.classList.add('resources-link');
-        a.textContent = item.link.startsWith('http') ? 'Visitar' : item.link;
+        a.textContent = item.link.startsWith('http') ? (lang === 'es' ? 'Visitar' : 'Visit') : item.link;
         a.target = item.link.startsWith('http') ? '_blank' : '_self';
         li.appendChild(strong);
         li.appendChild(' ');
@@ -186,3 +186,21 @@ languageToggleButton.addEventListener('click', () => {
 
 // Initialize with Default Language
 updateLanguage(currentLanguage);
+
+/* Optional: Dark Mode Toggle */
+/*
+const darkModeToggle = document.createElement('button');
+darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+darkModeToggle.classList.add('dark-mode-toggle');
+document.querySelector('.navbar-container').appendChild(darkModeToggle);
+
+darkModeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    darkModeToggle.innerHTML = document.body.classList.contains('dark-mode') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+});
+*/
+
+// Form Validation Enhancements (Optional)
+const reportForm = document.getElementById('anonymous-report-form');
+
+reportForm.addEventListener('
