@@ -22,6 +22,7 @@
             --font-primary: 'Roboto', sans-serif;
             --font-secondary: 'Lora', serif;
             --transition-speed: 0.3s;
+            --max-width: 1200px;
         }
 
         /* Reset and Base Styles */
@@ -58,7 +59,7 @@
         }
 
         .navbar-container {
-            max-width: 1200px;
+            max-width: var(--max-width);
             margin: 0 auto;
             padding: 15px 40px;
             display: flex;
@@ -691,38 +692,13 @@
                     <legend class="form-legend" id="form-legend">Detalles del Reporte</legend>
 
                     <div class="form-group">
-                        <label for="reporter-name" class="form-label" id="label-name">Nombre:</label>
-                        <input 
-                            type="text" 
-                            id="reporter-name" 
-                            name="reporterName" 
-                            class="form-input" 
-                            placeholder="Ingrese su nombre" 
-                            aria-required="true"
-                            required
-                        >
-                    </div>
-
-                    <div class="form-group">
-                        <label for="reporter-location" class="form-label" id="label-location">Ubicación en Colorado Springs:</label>
-                        <input 
-                            type="text" 
-                            id="reporter-location" 
-                            name="reporterLocation" 
-                            class="form-input" 
-                            placeholder="Ingrese su ubicación" 
-                            aria-required="true"
-                            required
-                        >
-                    </div>
-
-                    <div class="form-group">
                         <label for="crime-type" class="form-label" id="label-crime">Tipo de Delito:</label>
                         <select id="crime-type" name="crimeType" class="form-select" aria-required="true" required>
                             <option value="" disabled selected id="select-crime-placeholder">Seleccione el tipo de delito</option>
                             <option value="theft" id="option-theft">Robo</option>
                             <option value="assault" id="option-assault">Asalto</option>
                             <option value="fraud" id="option-fraud">Fraude</option>
+                            <option value="violent_crime" id="option-violent-crime">Crimen Violento</option>
                             <option value="other" id="option-other">Otro</option>
                         </select>
                     </div>
@@ -742,7 +718,7 @@
 
                     <div class="form-group disclaimer-group">
                         <p class="form-disclaimer" id="disclaimer-text">* No nos interesa la información sobre usted. Solo necesitamos detalles sobre el individuo que está reportando.</p>
-                        <p class="form-note" id="note-text">* Solo se investigarán individuos que residen ilegalmente en Colorado Springs y son violentos.</p>
+                        <p class="form-note" id="note-text">* Solo se investigarán individuos que residen ilegalmente en Colorado Springs y que han cometido actos violentos.</p>
                     </div>
 
                     <button type="submit" class="form-submit-button" id="submit-button">Enviar Reporte</button>
@@ -817,16 +793,17 @@
         const translations = {
             es: {
                 title: "Plataforma de Reporte Anónimo",
-                reporterName: "Nombre:",
-                reporterNamePlaceholder: "Ingrese su nombre",
-                reporterLocation: "Ubicación en Colorado Springs:",
-                reporterLocationPlaceholder: "Ingrese su ubicación",
+                reporterName: "Nombre:", // Removed
+                reporterNamePlaceholder: "Ingrese su nombre", // Removed
+                reporterLocation: "Ubicación en Colorado Springs:", // Removed
+                reporterLocationPlaceholder: "Ingrese su ubicación", // Removed
                 crimeType: "Tipo de Delito:",
                 crimeTypePlaceholder: "Seleccione el tipo de delito",
                 crimeOptions: {
                     theft: "Robo",
                     assault: "Asalto",
                     fraud: "Fraude",
+                    violent_crime: "Crimen Violento",
                     other: "Otro"
                 },
                 additionalDetails: "Detalles Adicionales:",
@@ -859,16 +836,17 @@
             },
             en: {
                 title: "Anonymous Reporting Platform",
-                reporterName: "Name:",
-                reporterNamePlaceholder: "Enter your name",
-                reporterLocation: "Location in Colorado Springs:",
-                reporterLocationPlaceholder: "Enter your location",
+                reporterName: "Name:", // Removed
+                reporterNamePlaceholder: "Enter your name", // Removed
+                reporterLocation: "Location in Colorado Springs:", // Removed
+                reporterLocationPlaceholder: "Enter your location", // Removed
                 crimeType: "Type of Crime:",
                 crimeTypePlaceholder: "Select the type of crime",
                 crimeOptions: {
                     theft: "Theft",
                     assault: "Assault",
                     fraud: "Fraud",
+                    violent_crime: "Violent Crime",
                     other: "Other"
                 },
                 additionalDetails: "Additional Details:",
@@ -907,15 +885,12 @@
             heroSubtitle: document.getElementById('hero-subtitle'),
             heroButton: document.getElementById('hero-button'),
             formLegend: document.getElementById('form-legend'),
-            labelName: document.getElementById('label-name'),
-            inputName: document.getElementById('reporter-name'),
-            labelLocation: document.getElementById('label-location'),
-            inputLocation: document.getElementById('reporter-location'),
             labelCrime: document.getElementById('label-crime'),
             selectCrimePlaceholder: document.getElementById('select-crime-placeholder'),
             optionTheft: document.getElementById('option-theft'),
             optionAssault: document.getElementById('option-assault'),
             optionFraud: document.getElementById('option-fraud'),
+            optionViolentCrime: document.getElementById('option-violent-crime'),
             optionOther: document.getElementById('option-other'),
             labelDetails: document.getElementById('label-details'),
             textareaDetails: document.getElementById('additional-details'),
@@ -945,15 +920,12 @@
 
             // Update Form Section
             elementsToTranslate.formLegend.textContent = t.formLegend;
-            elementsToTranslate.labelName.textContent = t.reporterName;
-            elementsToTranslate.inputName.placeholder = t.reporterNamePlaceholder;
-            elementsToTranslate.labelLocation.textContent = t.reporterLocation;
-            elementsToTranslate.inputLocation.placeholder = t.reporterLocationPlaceholder;
             elementsToTranslate.labelCrime.textContent = t.crimeType;
             elementsToTranslate.selectCrimePlaceholder.textContent = t.crimeTypePlaceholder;
             elementsToTranslate.optionTheft.textContent = t.crimeOptions.theft;
             elementsToTranslate.optionAssault.textContent = t.crimeOptions.assault;
             elementsToTranslate.optionFraud.textContent = t.crimeOptions.fraud;
+            elementsToTranslate.optionViolentCrime.textContent = t.crimeOptions.violent_crime;
             elementsToTranslate.optionOther.textContent = t.crimeOptions.other;
             elementsToTranslate.labelDetails.textContent = t.additionalDetails;
             elementsToTranslate.textareaDetails.placeholder = t.additionalDetailsPlaceholder;
@@ -968,6 +940,7 @@
             // Update Informational Section
             elementsToTranslate.infoTitle.textContent = t.infoTitle;
             elementsToTranslate.infoText.textContent = t.infoText;
+
             // Update Informational List
             elementsToTranslate.infoList.innerHTML = '';
             t.infoList.forEach(item => {
@@ -979,6 +952,7 @@
             // Update Resources Section
             elementsToTranslate.resourcesTitle.textContent = t.resourcesTitle;
             elementsToTranslate.resourcesText.textContent = t.resourcesText;
+
             // Update Resources List
             elementsToTranslate.resourcesList.innerHTML = '';
             t.resourcesList.forEach(item => {
@@ -1001,13 +975,14 @@
 
             // Update Navbar Links
             elementsToTranslate.navbarLinks.forEach(link => {
-                if (link.textContent.trim() === 'Reporte' || link.textContent.trim() === 'Report') {
+                const linkText = link.textContent.trim();
+                if (linkText === 'Reporte' || linkText === 'Report') {
                     link.textContent = lang === 'es' ? 'Reporte' : 'Report';
-                } else if (link.textContent.trim() === 'Aviso' || link.textContent.trim() === 'Notice') {
+                } else if (linkText === 'Aviso' || linkText === 'Notice') {
                     link.textContent = lang === 'es' ? 'Aviso' : 'Notice';
-                } else if (link.textContent.trim() === 'Cómo Funciona' || link.textContent.trim() === 'How It Works') {
+                } else if (linkText === 'Cómo Funciona' || linkText === 'How It Works') {
                     link.textContent = lang === 'es' ? 'Cómo Funciona' : 'How It Works';
-                } else if (link.textContent.trim() === 'Recursos' || link.textContent.trim() === 'Resources') {
+                } else if (linkText === 'Recursos' || linkText === 'Resources') {
                     link.textContent = lang === 'es' ? 'Recursos' : 'Resources';
                 }
             });
