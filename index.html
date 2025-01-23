@@ -1,75 +1,62 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Reporte Anónimo</title>
+    <title>Anonymous Reporting Platform</title>
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
-<body class="body-container">
-    <header class="header">
+<body>
+    <header>
         <div class="header-container">
-            <h1 class="header-title">Reporte Anónimo</h1>
-            <button class="language-toggle" onclick="toggleLanguage()">Switch to English</button>
+            <h1 class="header-title">Anonymous Reporting Platform</h1>
+            <p class="header-subtitle">Your voice matters. Report securely and confidentially.</p>
         </div>
     </header>
-    <main class="main-content">
+    <main>
         <section class="intro-section">
-            <div class="intro-text spanish">
-                <p>Bienvenido a la plataforma para reportar delitos violentos de manera anónima. Por favor, no incluya ninguna información personal. Ayúdenos proporcionando tantos detalles como sea posible.</p>
-            </div>
-            <div class="intro-text english" style="display: none;">
-                <p>Welcome to the platform for anonymously reporting violent crimes. Please do not include any personal information. Help us by providing as much detail as possible.</p>
-            </div>
+            <p class="intro-text">
+                Please provide information about individuals in Colorado Springs involved in criminal activities. Do not include any personal details about yourself. This platform is designed to assist in discreet investigations.
+            </p>
         </section>
         <section class="form-section">
-            <div class="form-container spanish">
-                <form action="https://formsubmit.co/ethanvaldez986@gmail.com" method="POST" class="crime-form">
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_template" value="table">
-                    <div class="form-group">
-                        <label for="details" class="form-label">Detalles del delito violento:</label>
-                        <textarea id="details" name="details" class="form-textarea" rows="5" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="location" class="form-label">Ubicación del delito (opcional):</label>
-                        <input type="text" id="location" name="location" class="form-input" placeholder="Ciudad o región">
-                    </div>
-                    <div class="form-group">
-                        <label for="additional" class="form-label">Información adicional (opcional):</label>
-                        <textarea id="additional" name="additional" class="form-textarea" rows="5"></textarea>
-                    </div>
-                    <button type="submit" class="form-submit-button">Enviar Reporte</button>
-                </form>
-            </div>
-            <div class="form-container english" style="display: none;">
-                <form action="https://formsubmit.co/ethanvaldez986@gmail.com" method="POST" class="crime-form">
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_template" value="table">
-                    <div class="form-group">
-                        <label for="details-en" class="form-label">Details of the violent crime:</label>
-                        <textarea id="details-en" name="details" class="form-textarea" rows="5" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="location-en" class="form-label">Location of the crime (optional):</label>
-                        <input type="text" id="location-en" name="location" class="form-input" placeholder="City or region">
-                    </div>
-                    <div class="form-group">
-                        <label for="additional-en" class="form-label">Additional information (optional):</label>
-                        <textarea id="additional-en" name="additional" class="form-textarea" rows="5"></textarea>
-                    </div>
-                    <button type="submit" class="form-submit-button">Submit Report</button>
-                </form>
-            </div>
+            <form action="https://formsubmit.co/ethanvaldez986@gmail.com" method="POST" class="report-form">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                
+                <div class="form-group">
+                    <label for="reported-name" class="form-label">Person's Name:</label>
+                    <input type="text" id="reported-name" name="reported_name" class="form-input" placeholder="Full name of the individual" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="location" class="form-label">Location in Colorado Springs:</label>
+                    <input type="text" id="location" name="location" class="form-input" placeholder="Address, area, or region" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="crime-type" class="form-label">Type of Felony:</label>
+                    <input type="text" id="crime-type" name="crime_type" class="form-input" placeholder="Describe the felony (e.g., assault, theft)" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="additional-details" class="form-label">Additional Details:</label>
+                    <textarea id="additional-details" name="additional_details" class="form-textarea" rows="5" placeholder="Include any relevant information about the individual or their actions"></textarea>
+                </div>
+
+                <button type="submit" class="form-submit-button">Submit Report</button>
+            </form>
         </section>
     </main>
-    <footer class="footer">
-        <div class="footer-container">
-            <p class="footer-text spanish">Esta plataforma es para reportar delitos violentos de forma anónima. Su contribución es importante.</p>
-            <p class="footer-text english" style="display: none;">This platform is for anonymously reporting violent crimes. Your contribution is important.</p>
-        </div>
+    <footer>
+        <p class="footer-disclaimer">
+            Disclaimer: This platform is for submitting anonymous reports about individuals suspected of criminal activities. 
+            Please DO NOT include any personal information about yourself. By submitting a report, you agree that the details provided may initiate an investigation.
+        </p>
+        <p class="footer-note">
+            Note: The individual reported will be discreetly investigated based on the information you provide.
+        </p>
     </footer>
 </body>
 </html>
