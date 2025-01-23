@@ -3,129 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Reporte Anónimo</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
-        }
-        header {
-            background-color: #003366;
-            color: #fff;
-            padding: 15px;
-            text-align: center;
-        }
-        header button {
-            background: #fff;
-            border: 1px solid #ccc;
-            color: #003366;
-            padding: 8px 12px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        header button:hover {
-            background: #f4f4f4;
-        }
-        main {
-            padding: 20px;
-        }
-        form {
-            max-width: 600px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-        textarea, input[type="text"], input[type="submit"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        input[type="submit"] {
-            background-color: #003366;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-        }
-        input[type="submit"]:hover {
-            background-color: #002244;
-        }
-        footer {
-            text-align: center;
-            padding: 10px 0;
-            margin-top: 20px;
-            font-size: 0.9em;
-            background-color: #f1f1f1;
-        }
-    </style>
-    <script>
-        function toggleLanguage() {
-            const spanishElements = document.querySelectorAll('.spanish');
-            const englishElements = document.querySelectorAll('.english');
-
-            spanishElements.forEach(el => el.style.display = el.style.display === 'none' ? 'block' : 'none');
-            englishElements.forEach(el => el.style.display = el.style.display === 'none' ? 'block' : 'none');
-        }
-    </script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
-<body>
-    <header>
-        <h1>Reporte Anónimo</h1>
-        <button onclick="toggleLanguage()">Switch to English</button>
+<body class="body-container">
+    <header class="header">
+        <div class="header-container">
+            <h1 class="header-title">Reporte Anónimo</h1>
+            <button class="language-toggle" onclick="toggleLanguage()">Switch to English</button>
+        </div>
     </header>
-    <main>
-        <!-- Spanish Version -->
-        <div class="spanish">
-            <p>Por favor, proporcione información sobre personas involucradas en delitos violentos. No incluya ninguna información personal sobre usted.</p>
-            <form action="https://formsubmit.co/ethanvaldez986@gmail.com" method="POST">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_template" value="table">
-                <label for="details">Detalles del delito violento:</label>
-                <textarea id="details" name="details" rows="5" required></textarea>
-
-                <label for="location">Ubicación del delito (opcional):</label>
-                <input type="text" id="location" name="location" placeholder="Ciudad o región">
-
-                <label for="additional">Información adicional (opcional):</label>
-                <textarea id="additional" name="additional" rows="5"></textarea>
-
-                <input type="submit" value="Enviar Reporte">
-            </form>
-        </div>
-
-        <!-- English Version -->
-        <div class="english" style="display: none;">
-            <p>Please provide information about individuals involved in violent crimes. Do not include any personal information about yourself.</p>
-            <form action="https://formsubmit.co/ethanvaldez986@gmail.com" method="POST">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_template" value="table">
-                <label for="details-en">Details of the violent crime:</label>
-                <textarea id="details-en" name="details" rows="5" required></textarea>
-
-                <label for="location-en">Location of the crime (optional):</label>
-                <input type="text" id="location-en" name="location" placeholder="City or region">
-
-                <label for="additional-en">Additional information (optional):</label>
-                <textarea id="additional-en" name="additional" rows="5"></textarea>
-
-                <input type="submit" value="Submit Report">
-            </form>
-        </div>
+    <main class="main-content">
+        <section class="intro-section">
+            <div class="intro-text spanish">
+                <p>Bienvenido a la plataforma para reportar delitos violentos de manera anónima. Por favor, no incluya ninguna información personal. Ayúdenos proporcionando tantos detalles como sea posible.</p>
+            </div>
+            <div class="intro-text english" style="display: none;">
+                <p>Welcome to the platform for anonymously reporting violent crimes. Please do not include any personal information. Help us by providing as much detail as possible.</p>
+            </div>
+        </section>
+        <section class="form-section">
+            <div class="form-container spanish">
+                <form action="https://formsubmit.co/ethanvaldez986@gmail.com" method="POST" class="crime-form">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+                    <div class="form-group">
+                        <label for="details" class="form-label">Detalles del delito violento:</label>
+                        <textarea id="details" name="details" class="form-textarea" rows="5" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="location" class="form-label">Ubicación del delito (opcional):</label>
+                        <input type="text" id="location" name="location" class="form-input" placeholder="Ciudad o región">
+                    </div>
+                    <div class="form-group">
+                        <label for="additional" class="form-label">Información adicional (opcional):</label>
+                        <textarea id="additional" name="additional" class="form-textarea" rows="5"></textarea>
+                    </div>
+                    <button type="submit" class="form-submit-button">Enviar Reporte</button>
+                </form>
+            </div>
+            <div class="form-container english" style="display: none;">
+                <form action="https://formsubmit.co/ethanvaldez986@gmail.com" method="POST" class="crime-form">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+                    <div class="form-group">
+                        <label for="details-en" class="form-label">Details of the violent crime:</label>
+                        <textarea id="details-en" name="details" class="form-textarea" rows="5" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="location-en" class="form-label">Location of the crime (optional):</label>
+                        <input type="text" id="location-en" name="location" class="form-input" placeholder="City or region">
+                    </div>
+                    <div class="form-group">
+                        <label for="additional-en" class="form-label">Additional information (optional):</label>
+                        <textarea id="additional-en" name="additional" class="form-textarea" rows="5"></textarea>
+                    </div>
+                    <button type="submit" class="form-submit-button">Submit Report</button>
+                </form>
+            </div>
+        </section>
     </main>
-    <footer>
-        <p class="spanish">Esta plataforma es para reportar delitos violentos de forma anónima. Proporcione tantos detalles como sea posible.</p>
-        <p class="english" style="display: none;">This platform is for anonymously reporting violent crimes. Please provide as much detail as possible.</p>
+    <footer class="footer">
+        <div class="footer-container">
+            <p class="footer-text spanish">Esta plataforma es para reportar delitos violentos de forma anónima. Su contribución es importante.</p>
+            <p class="footer-text english" style="display: none;">This platform is for anonymously reporting violent crimes. Your contribution is important.</p>
+        </div>
     </footer>
 </body>
 </html>
